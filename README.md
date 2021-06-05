@@ -1,6 +1,3 @@
 # Patient Scheduling System
 
-Todo:
--[] Mockup DB
--[] Create DB models & controllers
--[] Create DB api routes
+Todo: -[x] Mockup DB -[x] Create DB models & controllers -[x] Create DB api routes
