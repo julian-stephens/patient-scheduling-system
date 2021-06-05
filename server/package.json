@@ -6,6 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/julianstephens/patient-scheduling-system.git"
+  },
   "keywords": [],
   "author": "Julian Stephens",
   "license": "ISC"
