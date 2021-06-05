@@ -1,23 +1,54 @@
-import {UserController} from "./controller/UserController";
+import { PatientController } from "./controller/PatientController";
+import { DoctorController } from "./controller/DoctorController";
 
-export const Routes = [{
+export const Routes = [
+  {
     method: "get",
-    route: "/users",
-    controller: UserController,
-    action: "all"
-}, {
+    route: "/patients",
+    controller: PatientController,
+    action: "all",
+  },
+  {
     method: "get",
-    route: "/users/:id",
-    controller: UserController,
-    action: "one"
-}, {
+    route: "/patients/:id",
+    controller: PatientController,
+    action: "one",
+  },
+  {
     method: "post",
-    route: "/users",
-    controller: UserController,
-    action: "save"
-}, {
+    route: "/patients",
+    controller: PatientController,
+    action: "save",
+  },
+  {
     method: "delete",
-    route: "/users/:id",
-    controller: UserController,
-    action: "remove"
-}];
+    route: "/patients/:id",
+    controller: PatientController,
+    action: "remove",
+  },
+  {
+    method: "get",
+    route: "/doctors",
+    controller: DoctorController,
+    action: "all",
+  },
+  {
+    method: "get",
+    route: "/doctors/:id",
+    controller: DoctorController,
+    action: "one",
+  },
+  {
+    method: "post",
+    route: "/doctors",
+    controller: DoctorController,
+    action: "save",
+  },
+  {
+    method: "delete",
+    route: "/doctors/:id",
+    controller: DoctorController,
+    action: "remove",
+  },
+];
+
