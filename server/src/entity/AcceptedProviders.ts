@@ -1,13 +1,10 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity()
-export class Doctor {
+export class AcceptedProviders {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  firstName: string;
-
-  @Column()
-  lasttName: string;
+  @Column({ length: 100 })
+  name: string;
 }
