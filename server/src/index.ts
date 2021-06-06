@@ -4,8 +4,8 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import { Request, Response } from "express";
 import { Routes } from "./routes";
-import { Patient } from "./entity/Patient";
-import { Doctor } from "./entity/Doctor";
+import { Patients } from "./entity/Patients";
+import { Doctors } from "./entity/Doctors";
 
 createConnection()
   .then(async (connection) => {
@@ -43,20 +43,20 @@ createConnection()
     app.listen(3000);
 
     // insert new patients for test
-    await connection.manager.save(
-      connection.manager.create(Patient, {
-        firstName: "Timber",
-        lastName: "Saw",
-        age: 27,
-      })
-    );
-    await connection.manager.save(
-      connection.manager.create(Patient, {
-        firstName: "Phantom",
-        lastName: "Assassin",
-        age: 24,
-      })
-    );
+    //     await connection.manager.save(
+    //   connection.manager.create(Patient, {
+    //     firstName: "Timber",
+    //     lastName: "Saw",
+    //     age: 27,
+    //   })
+    // );
+    // await connection.manager.save(
+    //   connection.manager.create(Patient, {
+    //     firstName: "Phantom",
+    //     lastName: "Assassin",
+    //     age: 24,
+    //   })
+    // );
 
     console.log(
       "Express server has started on port 3000. Open http://localhost:3000/patients to see results"
