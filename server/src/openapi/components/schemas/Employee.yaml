@@ -3,9 +3,6 @@ properties:
   $ref: ./Person.yaml
   role:
     type: string
-    enum:
-      - Receptionist
-      - Doctor
-      - Supervisor
+    $ref: ../enums/Roles.yaml
   supervisor:
     $ref: ./Person.yaml

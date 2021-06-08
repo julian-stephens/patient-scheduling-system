@@ -1,0 +1,6 @@
+GeneralError:
+  description: General Error
+  content:
+    application/json:
+      schema:
+        $ref: ../schemas/Error.yaml

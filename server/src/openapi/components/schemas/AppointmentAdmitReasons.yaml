@@ -1,6 +1,2 @@
 type: string
-enum:
-  - sick
-  - physical
-  - drug
-  - allergy
+$ref: ../enums/AppointmentAdmitReasons.yaml

@@ -23,20 +23,19 @@ properties:
   sex:
     description: The person's sex.
     type: string
-    enum:
-      - male
-      - female
+    $ref: ../enums/Sex.yaml
     nullable: false
   dob:
     $ref: ./DOB.yaml
     nullable: true
+  appointments:
+    $ref: ./Appointments.yaml
+    nullable: false
   createdAt:
     type: string
     format: date-time
     nullable: false
   personType:
     type: string
-    enum:
-      - Patient
-      - Employee
+    $ref: ../enums/Roles.yaml
     nullable: false

@@ -1,0 +1,6 @@
+sortType:
+  type: string
+  description: "The direction of the sort"
+  enum:
+    - asc
+    - desc

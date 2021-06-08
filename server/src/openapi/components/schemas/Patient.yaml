@@ -8,9 +8,12 @@ allOf:
       type: array
       items:
         $ref: ./Medication
-    appointments:
-      $ref: ./Appointments.yaml
     pharmacy: 
       $ref: ./Pharmacy.yaml
+    primaryDoctor:
+      $ref: ./Employee.yaml
+    admitStatus:
+      type: boolean
+
 
 
