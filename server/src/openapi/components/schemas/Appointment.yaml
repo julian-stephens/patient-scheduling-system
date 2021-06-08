@@ -1,0 +1,8 @@
+type: object
+properties:
+  $ref: ./UID.yaml
+  date:
+    type: string
+    format: date-time
+  reason:
+    $ref: ./AppointmentAdmitReasons.yaml

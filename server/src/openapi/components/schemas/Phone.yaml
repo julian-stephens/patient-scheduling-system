@@ -1,0 +1,4 @@
+description: User phone number
+type: string
+pattern: '^\d{3}-\d{3}-\d{4}$'
+example: 111-222-3333

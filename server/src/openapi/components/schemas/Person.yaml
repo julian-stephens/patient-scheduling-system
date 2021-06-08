@@ -1,0 +1,42 @@
+type: object
+discriminator:
+  propertyName: personType
+properties:
+  $ref: ./UID.yaml
+  name:
+    description: The person's full legal name.
+    $ref: ./Name.yaml
+    nullable: false
+  email:
+    description: The person's email address.
+    $ref: ./Email.yaml
+    nullable: false
+  phone:
+    description: The person's phone number.
+    $ref: ./Phone.yaml
+    nullable: false
+  address:
+    description: The person's address.
+    anyOf:
+      - $ref: ./Address.yaml
+    nullable: true
+  sex:
+    description: The person's sex.
+    type: string
+    enum:
+      - male
+      - female
+    nullable: false
+  dob:
+    $ref: ./DOB.yaml
+    nullable: true
+  createdAt:
+    type: string
+    format: date-time
+    nullable: false
+  personType:
+    type: string
+    enum:
+      - Patient
+      - Employee
+    nullable: false

@@ -1,0 +1,4 @@
+description: The full name of a resource
+type: string
+maxLength: 100
+example: John Doe

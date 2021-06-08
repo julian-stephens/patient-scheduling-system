@@ -1,0 +1,16 @@
+description: A representation of a Patient
+allOf:
+  - $ref: ./Person.yaml
+  - type: object
+  properties:
+    medications:
+      description: The medications that a patient is currently prescribed
+      type: array
+      items:
+        $ref: ./Medication
+    appointments:
+      $ref: ./Appointments.yaml
+    pharmacy: 
+      $ref: ./Pharmacy.yaml
+
+

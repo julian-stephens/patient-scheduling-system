@@ -1,0 +1,11 @@
+type: object
+properties:
+  $ref: ./Person.yaml
+  role:
+    type: string
+    enum:
+      - Receptionist
+      - Doctor
+      - Supervisor
+  supervisor:
+    $ref: ./Person.yaml
