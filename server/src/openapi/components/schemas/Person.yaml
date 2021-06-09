@@ -2,7 +2,9 @@ type: object
 discriminator:
   propertyName: personType
 properties:
-  $ref: ./UID.yaml
+  id:
+    $ref: ./UID.yaml
+    nullable: true
   name:
     description: The person's full legal name.
     $ref: ./Name.yaml

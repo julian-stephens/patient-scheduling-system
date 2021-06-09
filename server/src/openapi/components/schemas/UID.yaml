@@ -1,4 +1,3 @@
-id:
-  type: string
-  description: The unique identifier of the resource
-  maxLength: 5000
+type: string
+description: The unique identifier of the resource
+maxLength: 5000

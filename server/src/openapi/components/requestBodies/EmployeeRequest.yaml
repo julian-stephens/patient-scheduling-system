@@ -1,0 +1,5 @@
+description: Employee to add to the system
+content:
+  "application/json":
+    schema:
+      $ref: ../schemas/Employee.yaml

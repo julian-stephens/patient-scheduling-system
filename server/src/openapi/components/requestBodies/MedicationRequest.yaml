@@ -1,0 +1,5 @@
+description: Medication to add to the system
+content:
+  "application/json":
+    schema:
+      $ref: ../schemas/Medication.yaml

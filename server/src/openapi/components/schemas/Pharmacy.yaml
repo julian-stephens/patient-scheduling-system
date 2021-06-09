@@ -1,7 +1,9 @@
 description: A pharmacy that fills patient presciptions
 type: object
 properties:
-  $ref: ./UID.yaml
+  id:
+    $ref: ./UID.yaml
+    nullable: true
   name:
     $ref: ./Name.yaml
   address:

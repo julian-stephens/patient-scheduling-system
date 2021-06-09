@@ -1,6 +1,8 @@
 type: object
 properties:
-  $ref: ./UID.yaml
+  id:
+    $ref: ./UID.yaml
+    nullable: true
   dateTime:
     type: string
     format: date-time

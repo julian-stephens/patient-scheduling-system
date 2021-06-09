@@ -22,7 +22,8 @@
   post:
     summary: Create a patient
     operationId: createPatient
+    requestBody:
+      $ref: ../components/requestBodies/PatientRequest.yaml
     responses:
-      "201":
-        description: Null response
+      $ref: ../components/responses/Created.yaml
       $ref: ../components/responses/GeneralError.yaml

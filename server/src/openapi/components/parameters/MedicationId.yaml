@@ -1,0 +1,6 @@
+- name: medicationId
+  in: path
+  required: true
+  description: The id of the medication to retrieve
+  schema:
+    $ref: ../components/schemas/UID.yaml
