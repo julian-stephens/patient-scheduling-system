@@ -1,0 +1,28 @@
+/patients:
+  get:
+    summary: List all patients
+    operationId: getAllPatients
+    parameters:
+      $ref: ../components/parameters/LimitParam.yaml
+      $ref: ../components/parameters/SortParam.yaml
+    responses:
+      "200":
+        description: A paged array of patients
+        headers:
+          x-next:
+            description: A link to the next page of responses
+            schema:
+              type: string
+        content:
+          application/json:
+            schema:
+              $ref: ../components/schemas/Patients.yaml
+      $ref: ../components/responses/GeneralError.yaml
+
+  post:
+    summary: Create a patient
+    operationId: createPatient
+    responses:
+      "201":
+        description: Null response
+      $ref: ../components/responses/GeneralError.yaml

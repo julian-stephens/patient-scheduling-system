@@ -1,8 +1,10 @@
-type: object
 description: A pharmacy that fills patient presciptions
+type: object
 properties:
   $ref: ./UID.yaml
   name:
     $ref: ./Name.yaml
   address:
     $ref: ./Address.yaml
+  createdAt:
+    $ref: ./CreatedAt.yaml

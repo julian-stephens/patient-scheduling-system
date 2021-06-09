@@ -1,8 +1,12 @@
-type: object
-properties:
-  $ref: ./Person.yaml
-  role:
-    type: string
-    $ref: ../enums/Roles.yaml
-  supervisor:
-    $ref: ./Person.yaml
+description: A representation of an Employee
+allOf:
+  - ref: ./Person.yaml
+  - type: object
+  properties:
+    role:
+      type: string
+      $ref: ../enums/Roles.yaml
+    supervisor:
+      $ref: ./Person.yaml
+    createdAt:
+      $ref: ./CreatedAt.yaml

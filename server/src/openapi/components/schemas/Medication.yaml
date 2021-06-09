@@ -1,5 +1,5 @@
-type: object
 description: A medication to be prescribed to a patient
+type: object
 required:
   - name
   - dosage
@@ -16,3 +16,7 @@ properties:
   duration:
     type: integer
     description: The number of days that the medication should be prescribed
+  patient:
+    $ref: ./Patient.yaml
+  createdAt:
+    $ref: ./CreatedAt.yaml

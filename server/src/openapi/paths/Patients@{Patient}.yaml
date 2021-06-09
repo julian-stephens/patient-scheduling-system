@@ -1,0 +1,32 @@
+/patient/{patientId}:
+  get:
+    summary: Info for a specific patient
+    operationId: showPatientById
+    parameters:
+      - name: patientId
+        in: path
+        required: true
+        description: The id of the patient to retrieve
+        schema:
+          $ref: ../components/schemas/UID.yaml
+    responses:
+      "200":
+        description: Expected response to a valid request
+        content:
+          application/json:
+            schema:
+              $ref: ../components/schemas/Patient.yaml
+      $ref: ../components/responses/NotFound.yaml
+      $ref: ../components/responses/GeneralError.yaml
+
+  put:
+    summary: Update info for a specific patient
+    operationId: updatePatient 
+    parameters: 
+      - name: patientId
+        in: path
+        required: true
+        description: The id of the patient to retrieve
+        schema:
+          $ref: ../components/schemas/UID.yaml
+

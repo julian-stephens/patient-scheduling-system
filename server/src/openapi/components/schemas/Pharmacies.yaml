@@ -1,0 +1,4 @@
+description: List all pharmacies
+type: array
+  items: 
+    $ref: ./Pharmacy.yaml

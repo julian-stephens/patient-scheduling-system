@@ -1,0 +1,4 @@
+description: List all medications
+type: array
+  items:
+    $ref: ./Medication.yaml

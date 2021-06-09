@@ -1,8 +1,10 @@
 type: object
 properties:
   $ref: ./UID.yaml
-  date:
+  dateTime:
     type: string
     format: date-time
   reason:
     $ref: ./AppointmentAdmitReasons.yaml
+  createdAt:
+    $ref: ./CreatedAt.yaml

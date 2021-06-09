@@ -6,15 +6,12 @@ properties:
   name:
     description: The person's full legal name.
     $ref: ./Name.yaml
-    nullable: false
   email:
     description: The person's email address.
     $ref: ./Email.yaml
-    nullable: false
   phone:
     description: The person's phone number.
     $ref: ./Phone.yaml
-    nullable: false
   address:
     description: The person's address.
     anyOf:
@@ -24,18 +21,13 @@ properties:
     description: The person's sex.
     type: string
     $ref: ../enums/Sex.yaml
-    nullable: false
   dob:
     $ref: ./DOB.yaml
     nullable: true
   appointments:
     $ref: ./Appointments.yaml
-    nullable: false
   createdAt:
-    type: string
-    format: date-time
-    nullable: false
+    $ref: ./CreatedAt.yaml
   personType:
     type: string
     $ref: ../enums/Roles.yaml
-    nullable: false
