@@ -1,0 +1,29 @@
+/medications:
+  get:
+    summary: List all medications
+    operationId: getAllMedications
+    parameters:
+      $ref: ../components/parameters/LimitParam.yaml
+      $ref: ../components/parameters/SortParam.yaml
+    responses:
+      "200":
+        description: A paged array of medications
+        headers:
+          x-next:
+            description: A link to the next page of responses
+            schema:
+              type: string
+        content:
+          application/json:
+            schema:
+              $ref: ../components/schemas/Medications.yaml
+      $ref: ../components/responses/GeneralError.yaml
+
+  post:
+    summary: Create a medication
+    operationId: createMedication
+    requestBody:
+      $ref: ../components/requestBodies/MedicationRequest.yaml
+    responses:
+      $ref: ../components/responses/Created.yaml
+      $ref: ../components/responses/GeneralError.yaml

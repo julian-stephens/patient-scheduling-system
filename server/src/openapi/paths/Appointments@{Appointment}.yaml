@@ -1,100 +1,34 @@
 /appointment/{appointmentId}:
   get:
     summary: Info for a specific appointment
-    operationId: showPatientById
+    operationId: showAppointmentById
     parameters: 
-      $ref: ../components/parameters/PatientId.yaml
+      $ref: ../components/parameters/AppointmentId.yaml
     responses:
       "200":
         description: OK
         content:
           application/json:
             schema:
-              $ref: ../components/schemas/Patient.yaml
+              $ref: ../components/schemas/Appointment.yaml
       $ref: ../components/responses/NotFound.yaml
       $ref: ../components/responses/GeneralError.yaml
 
   put:
     summary: Update info for a specific appointment
-    operationId: updatePatient 
+    operationId: updateAppointment 
     parameters: 
-      $ref: ../components/parameters/PatientId.yaml
+      $ref: ../components/parameters/AppointmentId.yaml
     requestBody:
-      $ref: ../components/requestBodies/PatientRequest.yaml
+      $ref: ../components/requestBodies/AppointmentRequest.yaml
     responses:
       $ref: ../components/responses/Updated.yaml
       $ref: ../components/responses/GeneralError.yaml
 
   delete:
     summary: Delete a specific appointment
-    operationId: deletePatient
+    operationId: deleteAppointment
     parameters:
-      $ref: ../components/parameters/PatientId.yaml
-    responses:
-      $ref: ../components/responses/Deleted.yaml
-        content:
-          "application/json":
-            schema:
-              $ref: ../components/schemas/Patient.yaml
-      $ref: ../components/responses/GeneralError.yaml
-
-/appointment/{appointmentId}/appointments:
-  get:
-    summary: Get all appointments for a specific appointment
-    operationId: getAppointmentsByPatient
-    parameters:
-      $ref: ../components/parameters/PatientId.yaml
-    responses:
-      $ref: ../components/responses/Ok.yaml
-        content: 
-          "application/json":
-            schema:
-              $ref: ../components/schemas/Appointments.yaml
-      $ref: ../components/responses/GeneralError.yaml
-
-  post:
-    summary: Create an appointment for a specific appointment
-    operationId: createAppointmentByPatient
-    parameters:
-      $ref: ../components/parameters/PatientId.yaml
-    requestBody:
-      $ref: ../components/requestBodies/AppointmentRequest.yaml
-    responses:
-      $ref: ../components/responses/Created.yaml
-      $ref: ../components/responses/GeneralError.yaml
-
-/appointment/{appointmentId}/{appointmentId}:
-  get: 
-    summary: Get a specific appointment for a specific appointment
-    operationId: showAppointmentByPatient
-    parameters:
-      $ref: ../components/parameters/PatientId.yaml
-      $ref: ../components/parameters/AppointmentId.yaml
-    responses:
-      $ref: ../components/responses/Ok.yaml
-        content:
-          "application/json":
-            schema:
-              $ref: ../components/schemas/Appointment.yaml
-      $ref: ../components/responses/GeneralError.yaml
-
-  put:
-    summary: Update a specific appointment for a specific appointment
-    operationId: updateAppointmentByPatient
-    parameters:
-      $ref: ../components/parameters/PatientId.yaml
-      $ref: ../components/parameters/AppointmentId.yaml
-    requestBody:
-      $ref: ../components/requestBodies/AppointmentRequest.yaml
-    responses:
-      $ref: ../components/responses/Updated.yaml
-      $ref: ../components/responses/GeneralError.yaml
-
-  delete:
-    summary: Delete a specific appointment for a specific appointment
-    operationId: deleteAppointmentByPatient
-    parameters:
-      $ref: ../components/parameters/PatientId.yaml
       $ref: ../components/parameters/AppointmentId.yaml
     responses:
       $ref: ../components/responses/Deleted.yaml

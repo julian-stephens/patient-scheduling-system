@@ -1,0 +1,29 @@
+/pharmacies:
+  get:
+    summary: List all pharmacies
+    operationId: getAllPharmacies
+    parameters:
+      $ref: ../components/parameters/LimitParam.yaml
+      $ref: ../components/parameters/SortParam.yaml
+    responses:
+      "200":
+        description: A paged array of pharmacies
+        headers:
+          x-next:
+            description: A link to the next page of responses
+            schema:
+              type: string
+        content:
+          application/json:
+            schema:
+              $ref: ../components/schemas/Pharmacies.yaml
+      $ref: ../components/responses/GeneralError.yaml
+
+  post:
+    summary: Create a pharmacy
+    operationId: createPharmacy
+    requestBody:
+      $ref: ../components/requestBodies/PharmacyRequest.yaml
+    responses:
+      $ref: ../components/responses/Created.yaml
+      $ref: ../components/responses/GeneralError.yaml

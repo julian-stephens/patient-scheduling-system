@@ -1,0 +1,39 @@
+/medications/{medicationId}:
+  get:
+    summary: Info for a specific medication
+    operationId: showMedicationById
+    parameters: 
+      $ref: ../components/parameters/MedicationId.yaml
+    responses:
+      "200":
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: ../components/schemas/Medication.yaml
+      $ref: ../components/responses/NotFound.yaml
+      $ref: ../components/responses/GeneralError.yaml
+
+  put:
+    summary: Update info for a specific medication
+    operationId: updateMedication 
+    parameters: 
+      $ref: ../components/parameters/MedicationId.yaml
+    requestBody:
+      $ref: ../components/requestBodies/MedicationRequest.yaml
+    responses:
+      $ref: ../components/responses/Updated.yaml
+      $ref: ../components/responses/GeneralError.yaml
+
+  delete:
+    summary: Delete a specific medication
+    operationId: deleteMedication
+    parameters:
+      $ref: ../components/parameters/MedicationId.yaml
+    responses:
+      $ref: ../components/responses/Deleted.yaml
+        content:
+          "application/json":
+            schema:
+              $ref: ../components/schemas/Medication.yaml
+      $ref: ../components/responses/GeneralError.yaml

@@ -1,0 +1,39 @@
+/pharmacies/{pharmacyId}:
+  get:
+    summary: Info for a specific pharmacy
+    operationId: showPharmacyById
+    parameters: 
+      $ref: ../components/parameters/PharmacyId.yaml
+    responses:
+      "200":
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: ../components/schemas/Pharmacy.yaml
+      $ref: ../components/responses/NotFound.yaml
+      $ref: ../components/responses/GeneralError.yaml
+
+  put:
+    summary: Update info for a specific pharmacy
+    operationId: updatePharmacy 
+    parameters: 
+      $ref: ../components/parameters/PharmacyId.yaml
+    requestBody:
+      $ref: ../components/requestBodies/PharmacyRequest.yaml
+    responses:
+      $ref: ../components/responses/Updated.yaml
+      $ref: ../components/responses/GeneralError.yaml
+
+  delete:
+    summary: Delete a specific pharmacy
+    operationId: deletePharmacy
+    parameters:
+      $ref: ../components/parameters/PharmacyId.yaml
+    responses:
+      $ref: ../components/responses/Deleted.yaml
+        content:
+          "application/json":
+            schema:
+              $ref: ../components/schemas/Pharmacy.yaml
+      $ref: ../components/responses/GeneralError.yaml
