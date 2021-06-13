@@ -10,7 +10,7 @@ info:
     name: Apache 2.0
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
   description:
-    $ref: ./info-description.md
+    $ref: ./README.md
 # tags:
 #   - name: Echo
 #     description: Example echo operations.
@@ -19,28 +19,40 @@ info:
 #   - name: Tag
 #     description: This is a tag description.
 paths:
-  "/users/{username}":
-    $ref: "paths/users@{username}.yaml"
-  /echo:
-    $ref: paths/echo.yaml
-  /pathItem:
-    $ref: paths/path-item.yaml
-  /pathItemWithExamples:
-    $ref: paths/path-item-with-examples.yaml
+  /patients:
+    $ref: paths/Patients.yaml
+  /patients/{patientId}:
+    $ref: paths/Patients@{Patient}.yaml
+  /employees:
+    $ref: paths/Employees.yaml
+  /employees/{employeeId}:
+    $ref: paths/Employees@{Employee}.yaml
+  /appointments:
+    $ref: paths/Appointments.yaml
+  /appointments/{appointmentId}:
+    $ref: paths/Appointments@{Appointment}.yaml
+  /medications:
+    $ref: paths/Medications.yaml
+  /medications/{medicationId}:
+    $ref: paths/Medications@{Medication}.yaml
+  /pharmacies:
+    $ref: paths/Pharmacies.yaml
+  /pharmacies/{pharmacyId}:
+    $ref: paths/Pharmacies@{Pharmacy}.yaml
 components:
-  securitySchemes:
-    main_auth:
-      type: oauth2
-      flows:
-        implicit:
-          authorizationUrl: "http://example.com/api/oauth/dialog"
-          scopes:
-            "read:users": read users info
-            "write:users": modify or remove users
-    api_key:
-      type: apiKey
-      in: header
-      name: api_key
-    basic_auth:
-      type: http
-      scheme: basic
+  #   securitySchemes:
+  # main_auth:
+  #   type: oauth2
+  #   flows:
+  #     implicit:
+  #       authorizationUrl: "http://example.com/api/oauth/dialog"
+  #       scopes:
+  #         "read:users": read users info
+  # "write:users": modify or remove users
+  api_key:
+    type: apiKey
+    in: header
+    name: api_key
+  basic_auth:
+    type: http
+    scheme: basic
