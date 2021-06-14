@@ -1,6 +1,8 @@
 /medications:
   get:
     summary: List all medications
+    tags:
+      - medications
     operationId: getAllMedications
     parameters:
       $ref: ../components/parameters/LimitParam.yaml
@@ -21,6 +23,8 @@
 
   post:
     summary: Create a medication
+    tags:
+      - medications
     operationId: createMedication
     requestBody:
       $ref: ../components/requestBodies/MedicationRequest.yaml

@@ -1,6 +1,8 @@
-/patient/{patientId}:
+"/patient/{patientId}":
   get:
     summary: Info for a specific patient
+    tags:
+      - patients
     operationId: showPatientById
     parameters: 
       $ref: ../components/parameters/PatientId.yaml
@@ -16,6 +18,8 @@
 
   put:
     summary: Update info for a specific patient
+    tags:
+      - patients
     operationId: updatePatient 
     parameters: 
       $ref: ../components/parameters/PatientId.yaml
@@ -27,6 +31,8 @@
 
   delete:
     summary: Delete a specific patient
+    tags:
+      - patients
     operationId: deletePatient
     parameters:
       $ref: ../components/parameters/PatientId.yaml
@@ -38,9 +44,11 @@
               $ref: ../components/schemas/Patient.yaml
       $ref: ../components/responses/GeneralError.yaml
 
-/patient/{patientId}/appointments:
+"/patient/{patientId}/appointments":
   get:
     summary: Get all appointments for a specific patient
+    tags:
+      - patients
     operationId: getAppointmentsByPatient
     parameters:
       $ref: ../components/parameters/PatientId.yaml
@@ -54,6 +62,8 @@
 
   post:
     summary: Create an appointment for a specific patient
+    tags:
+      - patients
     operationId: createAppointmentByPatient
     parameters:
       $ref: ../components/parameters/PatientId.yaml
@@ -63,9 +73,11 @@
       $ref: ../components/responses/Created.yaml
       $ref: ../components/responses/GeneralError.yaml
 
-/patient/{patientId}/{appointmentId}:
+"/patient/{patientId}/{appointmentId}":
   get: 
     summary: Get a specific appointment for a specific patient
+    tags:
+      - patients
     operationId: showAppointmentByPatient
     parameters:
       $ref: ../components/parameters/PatientId.yaml
@@ -80,6 +92,8 @@
 
   put:
     summary: Update a specific appointment for a specific patient
+    tags:
+      - patients
     operationId: updateAppointmentByPatient
     parameters:
       $ref: ../components/parameters/PatientId.yaml
@@ -92,6 +106,8 @@
 
   delete:
     summary: Delete a specific appointment for a specific patient
+    tags:
+      - patients
     operationId: deleteAppointmentByPatient
     parameters:
       $ref: ../components/parameters/PatientId.yaml
@@ -104,9 +120,11 @@
               $ref: ../components/schemas/Appointment.yaml
       $ref: ../components/responses/GeneralError.yaml
 
-/patient/{patientId}/medications:
+"/patient/{patientId}/medications":
   get:
     summary: Get all medications for a specific patient
+    tags:
+      - patients
     operationId: getMedicationsByPatient
     parameters:
       $ref: ../components/parameters/PatientId.yaml
@@ -120,6 +138,8 @@
 
   post:
     summary: Create an medication for a specific patient
+    tags:
+      - patients
     operationId: createMedicationByPatient
     parameters:
       $ref: ../components/parameters/PatientId.yaml
@@ -129,9 +149,11 @@
       $ref: ../components/responses/Created.yaml
       $ref: ../components/responses/GeneralError.yaml
 
-/patient/{patientId}/{medicationId}:
+"/patient/{patientId}/{medicationId}":
   get: 
     summary: Get a specific medication for a specific patient
+    tags:
+      - patients
     operationId: showMedicationByPatient
     parameters:
       $ref: ../components/parameters/PatientId.yaml
@@ -146,6 +168,8 @@
 
   put:
     summary: Update a specific medication for a specific patient
+    tags:
+      - patients
     operationId: updateMedicationByPatient
     parameters:
       $ref: ../components/parameters/PatientId.yaml
@@ -158,6 +182,8 @@
 
   delete:
     summary: Delete a specific medication for a specific patient
+    tags:
+      - patients
     operationId: deleteMedicationByPatient
     parameters:
       $ref: ../components/parameters/PatientId.yaml
@@ -170,9 +196,11 @@
               $ref: ../components/schemas/Medication.yaml
       $ref: ../components/responses/GeneralError.yaml
 
-/patient/{patientId}/pharmacies:
+"/patient/{patientId}/pharmacies":
   get:
     summary: Get all pharmacies for a specific patient
+    tags:
+      - patients
     operationId: getPharmaciesByPatient
     parameters:
       $ref: ../components/parameters/PatientId.yaml
@@ -186,6 +214,8 @@
 
   post:
     summary: Create a pharmacy for a specific patient
+    tags:
+      - patients
     operationId: createPharmacyByPatient
     parameters:
       $ref: ../components/parameters/PatientId.yaml
@@ -195,9 +225,11 @@
       $ref: ../components/responses/Created.yaml
       $ref: ../components/responses/GeneralError.yaml
 
-/patient/{patientId}/{pharmacyId}:
+"/patient/{patientId}/{pharmacyId}":
   get: 
     summary: Get a specific pharmacy for a specific patient
+    tags:
+      - patients
     operationId: showPharmaciesByPatient
     parameters:
       $ref: ../components/parameters/PatientId.yaml
@@ -212,6 +244,8 @@
 
   put:
     summary: Update a specific pharmacy for a specific patient
+    tags:
+      - patients
     operationId: updatePharmacyByPatient
     parameters:
       $ref: ../components/parameters/PatientId.yaml
@@ -224,6 +258,8 @@
 
   delete:
     summary: Delete a specific pharmacy for a specific patient
+    tags:
+      - patients
     operationId: deletePharmacyByPatient
     parameters:
       $ref: ../components/parameters/PatientId.yaml

@@ -1,6 +1,8 @@
 /pharmacies:
   get:
     summary: List all pharmacies
+    tags:
+      - pharmacies
     operationId: getAllPharmacies
     parameters:
       $ref: ../components/parameters/LimitParam.yaml
@@ -21,6 +23,8 @@
 
   post:
     summary: Create a pharmacy
+    tags:
+      - pharmacies
     operationId: createPharmacy
     requestBody:
       $ref: ../components/requestBodies/PharmacyRequest.yaml

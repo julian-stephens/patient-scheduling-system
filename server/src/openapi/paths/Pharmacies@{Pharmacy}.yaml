@@ -1,6 +1,8 @@
-/pharmacies/{pharmacyId}:
+"/pharmacies/{pharmacyId}":
   get:
     summary: Info for a specific pharmacy
+    tags:
+      - pharmacies
     operationId: showPharmacyById
     parameters: 
       $ref: ../components/parameters/PharmacyId.yaml
@@ -16,6 +18,8 @@
 
   put:
     summary: Update info for a specific pharmacy
+    tags:
+      - pharmacies
     operationId: updatePharmacy 
     parameters: 
       $ref: ../components/parameters/PharmacyId.yaml
@@ -27,6 +31,8 @@
 
   delete:
     summary: Delete a specific pharmacy
+    tags:
+      - pharmacies
     operationId: deletePharmacy
     parameters:
       $ref: ../components/parameters/PharmacyId.yaml

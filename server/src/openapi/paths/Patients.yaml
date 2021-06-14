@@ -1,6 +1,8 @@
 /patients:
   get:
     summary: List all patients
+    tags:
+      - patients
     operationId: getAllPatients
     parameters:
       $ref: ../components/parameters/LimitParam.yaml
@@ -21,6 +23,8 @@
 
   post:
     summary: Create a patient
+    tags:
+      - patients
     operationId: createPatient
     requestBody:
       $ref: ../components/requestBodies/PatientRequest.yaml

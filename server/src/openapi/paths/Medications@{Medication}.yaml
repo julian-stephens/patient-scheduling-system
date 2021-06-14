@@ -1,6 +1,8 @@
-/medications/{medicationId}:
+"/medications/{medicationId}":
   get:
     summary: Info for a specific medication
+    tags:
+      - medications
     operationId: showMedicationById
     parameters: 
       $ref: ../components/parameters/MedicationId.yaml
@@ -16,6 +18,8 @@
 
   put:
     summary: Update info for a specific medication
+    tags:
+      - medications
     operationId: updateMedication 
     parameters: 
       $ref: ../components/parameters/MedicationId.yaml
@@ -27,6 +31,8 @@
 
   delete:
     summary: Delete a specific medication
+    tags:
+      - medications
     operationId: deleteMedication
     parameters:
       $ref: ../components/parameters/MedicationId.yaml

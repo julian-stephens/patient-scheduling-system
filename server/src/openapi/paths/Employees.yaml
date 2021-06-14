@@ -1,6 +1,8 @@
 /employees:
   get:
     summary: List all employees
+    tags:
+      - employees
     operationId: getAllEmployees
     parameters:
       $ref: ../components/parameters/LimitParam.yaml
@@ -21,6 +23,8 @@
 
   post:
     summary: Create an employee
+    tags:
+      - employees
     operationId: createEmployee
     requestBody:
       $ref: ../components/requestBodies/EmployeeRequest.yaml

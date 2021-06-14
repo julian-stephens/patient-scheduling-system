@@ -1,15 +1,15 @@
-/appointments:
+/patients:
   get:
-    summary: List all appointments
+    summary: List all patients
     tags:
-      - appointments
-    operationId: getAllAppointments
+      - patients
+    operationId: getAllPatients
     parameters:
       $ref: ../components/parameters/LimitParam.yaml
       $ref: ../components/parameters/SortParam.yaml
     responses:
       "200":
-        description: A paged array of appointments
+        description: A paged array of patients
         headers:
           x-next:
             description: A link to the next page of responses
@@ -18,16 +18,14 @@
         content:
           application/json:
             schema:
-              $ref: ../components/schemas/Appointments.yaml
+              $ref: ../components/schemas/Patients.yaml
       $ref: ../components/responses/GeneralError.yaml
 
   post:
-    summary: Create a appointment
-    tags:
-      - appointments
-    operationId: createAppointment
+    summary: Create a patient
+    operationId: createPatient
     requestBody:
-      $ref: ../components/requestBodies/AppointmentRequest.yaml
+      $ref: ../components/requestBodies/PatientRequest.yaml
     responses:
       $ref: ../components/responses/Created.yaml
       $ref: ../components/responses/GeneralError.yaml

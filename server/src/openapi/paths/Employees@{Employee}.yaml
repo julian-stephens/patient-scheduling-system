@@ -1,6 +1,8 @@
-/employee/{employeeId}:
+"/employee/{employeeId}":
   get:
     summary: Info for a specific employee
+    tags:
+      - employees
     operationId: showEmployeeById
     parameters: 
       $ref: ../components/parameters/EmployeeId.yaml
@@ -16,6 +18,8 @@
 
   put:
     summary: Update info for a specific employee
+    tags:
+      - employees
     operationId: updateEmployee 
     parameters: 
       $ref: ../components/parameters/EmployeeId.yaml
@@ -27,6 +31,8 @@
 
   delete:
     summary: Delete a specific employee
+    tags:
+      - employees
     operationId: deleteEmployee
     parameters:
       $ref: ../components/parameters/EmployeeId.yaml
@@ -38,9 +44,11 @@
               $ref: ../components/schemas/Employee.yaml
       $ref: ../components/responses/GeneralError.yaml
 
-/employee/{employeeId}/appointments:
+"/employee/{employeeId}/appointments":
   get:
     summary: Get all appointments for a specific employee
+    tags:
+      - employees
     operationId: getAppointmentsByEmployee
     parameters:
       $ref: ../components/parameters/EmployeeId.yaml
@@ -54,6 +62,8 @@
 
   post:
     summary: Create an appointment for a specific employee
+    tags:
+      - employees
     operationId: createAppointmentByEmployee
     parameters:
       $ref: ../components/parameters/EmployeeId.yaml
@@ -63,9 +73,11 @@
       $ref: ../components/responses/Created.yaml
       $ref: ../components/responses/GeneralError.yaml
 
-/employee/{employeeId}/{appointmentId}:
+"/employee/{employeeId}/{appointmentId}":
   get: 
     summary: Get a specific appointment for a specific employee
+    tags:
+      - employees
     operationId: showAppointmentByEmployee
     parameters:
       $ref: ../components/parameters/EmployeeId.yaml
@@ -80,6 +92,8 @@
 
   put:
     summary: Update a specific appointment for a specific employee
+    tags:
+      - employees
     operationId: updateAppointmentByEmployee
     parameters:
       $ref: ../components/parameters/EmployeeId.yaml
@@ -92,6 +106,8 @@
 
   delete:
     summary: Delete a specific appointment for a specific employee
+    tags:
+      - employees
     operationId: deleteAppointmentByEmployee
     parameters:
       $ref: ../components/parameters/EmployeeId.yaml

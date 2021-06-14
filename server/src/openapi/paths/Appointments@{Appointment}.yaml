@@ -1,6 +1,8 @@
-/appointment/{appointmentId}:
+"/appointments/{appointmentId}":
   get:
     summary: Info for a specific appointment
+    tags:
+      - appointments
     operationId: showAppointmentById
     parameters: 
       $ref: ../components/parameters/AppointmentId.yaml
@@ -16,6 +18,8 @@
 
   put:
     summary: Update info for a specific appointment
+    tags:
+      - appointments
     operationId: updateAppointment 
     parameters: 
       $ref: ../components/parameters/AppointmentId.yaml
@@ -27,6 +31,8 @@
 
   delete:
     summary: Delete a specific appointment
+    tags:
+      - appointments
     operationId: deleteAppointment
     parameters:
       $ref: ../components/parameters/AppointmentId.yaml
