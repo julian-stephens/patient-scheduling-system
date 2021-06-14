@@ -1,5 +1,4 @@
-sort:
-  name: sort
-  in: query
-  schema:
-    $ref: ../enums/SortType.yaml
+name: sort
+in: query
+schema:
+  $ref: ../enums/SortType.yaml

@@ -1,11 +1,10 @@
-limitParam:
-  name: limit
-  in: query
-  description: max records to return
-  required: true
-  schema:
-    type: integer
-    format: int32
-    minimum: 10
-    maximum: 20
-    example: 15
+name: limit
+in: query
+description: max records to return
+required: true
+schema:
+  type: integer
+  format: int32
+  minimum: 10
+  maximum: 20
+  example: 15
