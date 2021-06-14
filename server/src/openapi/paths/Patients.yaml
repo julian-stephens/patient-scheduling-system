@@ -4,8 +4,8 @@ get:
     - patients
   operationId: getAllPatients
   parameters:
-    $ref: "../components/parameters/LimitParam.yaml"
-    $ref: "../components/parameters/SortParam.yaml"
+    - $ref: "../components/parameters/LimitParam.yaml"
+    - $ref: "../components/parameters/SortParam.yaml"
   responses:
     "200":
       description: A paged array of patients
