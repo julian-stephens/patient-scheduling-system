@@ -24,12 +24,12 @@ tags:
     description: Operations about pharmacies.
 paths:
   $ref: paths/Patients.yaml
-    $ref: "paths/Patients@{Patient}.yaml"
-  $ref: paths/Employees.yaml
-    $ref: "paths/Employees@{Employee}.yaml"
-  $ref: paths/Appointments.yaml
-    $ref: "paths/Appointments@{Appointment}.yaml"
-  $ref: paths/Medications.yaml
-    $ref: "paths/Medications@{Medication}.yaml"
-  $ref: paths/Pharmacies.yaml
-    $ref: "paths/Pharmacies@{Pharmacy}.yaml"
+  #   $ref: "paths/Patients@{Patient}.yaml"
+  # $ref: paths/Employees.yaml
+  #   $ref: "paths/Employees@{Employee}.yaml"
+  # $ref: paths/Appointments.yaml
+  #   $ref: "paths/Appointments@{Appointment}.yaml"
+  # $ref: paths/Medications.yaml
+  #   $ref: "paths/Medications@{Medication}.yaml"
+  # $ref: paths/Pharmacies.yaml
+  #   $ref: "paths/Pharmacies@{Pharmacy}.yaml"

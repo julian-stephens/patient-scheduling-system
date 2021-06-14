@@ -1,33 +1,32 @@
-/employees:
-  get:
-    summary: List all employees
-    tags:
-      - employees
-    operationId: getAllEmployees
-    parameters:
-      $ref: ../components/parameters/LimitParam.yaml
-      $ref: ../components/parameters/SortParam.yaml
-    responses:
-      "200":
-        description: A paged array of employees
-        headers:
-          x-next:
-            description: A link to the next page of responses
-            schema:
-              type: string
-        content:
-          application/json:
-            schema:
-              $ref: ../components/schemas/Employees.yaml
-      $ref: ../components/responses/GeneralError.yaml
+get:
+  summary: List all employees
+  tags:
+    - employees
+  operationId: getAllEmployees
+  parameters:
+    $ref: ../components/parameters/LimitParam.yaml
+    $ref: ../components/parameters/SortParam.yaml
+  responses:
+    "200":
+      description: A paged array of employees
+      headers:
+        x-next:
+          description: A link to the next page of responses
+          schema:
+            type: string
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Employees.yaml
+    $ref: ../components/responses/GeneralError.yaml
 
-  post:
-    summary: Create an employee
-    tags:
-      - employees
-    operationId: createEmployee
-    requestBody:
-      $ref: ../components/requestBodies/EmployeeRequest.yaml
-    responses:
-      $ref: ../components/responses/Created.yaml
-      $ref: ../components/responses/GeneralError.yaml
+post:
+  summary: Create an employee
+  tags:
+    - employees
+  operationId: createEmployee
+  requestBody:
+    $ref: ../components/requestBodies/EmployeeRequest.yaml
+  responses:
+    $ref: ../components/responses/Created.yaml
+    $ref: ../components/responses/GeneralError.yaml

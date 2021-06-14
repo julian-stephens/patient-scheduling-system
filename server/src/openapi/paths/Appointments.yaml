@@ -1,33 +1,32 @@
-/appointments:
-  get:
-    summary: List all appointments
-    tags:
-      - appointments
-    operationId: getAllAppointments
-    parameters:
-      $ref: ../components/parameters/LimitParam.yaml
-      $ref: ../components/parameters/SortParam.yaml
-    responses:
-      "200":
-        description: A paged array of appointments
-        headers:
-          x-next:
-            description: A link to the next page of responses
-            schema:
-              type: string
-        content:
-          application/json:
-            schema:
-              $ref: ../components/schemas/Appointments.yaml
-      $ref: ../components/responses/GeneralError.yaml
+get:
+  summary: List all appointments
+  tags:
+    - appointments
+  operationId: getAllAppointments
+  parameters:
+    $ref: ../components/parameters/LimitParam.yaml
+    $ref: ../components/parameters/SortParam.yaml
+  responses:
+    "200":
+      description: A paged array of appointments
+      headers:
+        x-next:
+          description: A link to the next page of responses
+          schema:
+            type: string
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Appointments.yaml
+    $ref: ../components/responses/GeneralError.yaml
 
-  post:
-    summary: Create a appointment
-    tags:
-      - appointments
-    operationId: createAppointment
-    requestBody:
-      $ref: ../components/requestBodies/AppointmentRequest.yaml
-    responses:
-      $ref: ../components/responses/Created.yaml
-      $ref: ../components/responses/GeneralError.yaml
+post:
+  summary: Create a appointment
+  tags:
+    - appointments
+  operationId: createAppointment
+  requestBody:
+    $ref: ../components/requestBodies/AppointmentRequest.yaml
+  responses:
+    $ref: ../components/responses/Created.yaml
+    $ref: ../components/responses/GeneralError.yaml
