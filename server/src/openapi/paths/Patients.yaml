@@ -5,18 +5,18 @@
       - patients
     operationId: getAllPatients
     responses:
-      - "200":
-          description: A paged array of patients
-          headers:
-            x-next:
-              description: A link to the next page of responses
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: ../components/schemas/Patients.yaml
-      - $ref: ../components/responses/GeneralError.yaml
+      "200":
+        description: A paged array of patients
+        headers:
+          x-next:
+            description: A link to the next page of responses
+            schema:
+              type: string
+        content:
+          application/json:
+            schema:
+              $ref: ../components/schemas/Patients.yaml
+      $ref: ../components/responses/GeneralError.yaml
 
   post:
     summary: Create a patient
@@ -26,5 +26,5 @@
     requestBody:
       $ref: ../components/requestBodies/PatientRequest.yaml
     responses:
-      - $ref: ../components/responses/Created.yaml
-      - $ref: ../components/responses/GeneralError.yaml
+      $ref: ../components/responses/Created.yaml
+      $ref: ../components/responses/GeneralError.yaml
