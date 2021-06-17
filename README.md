@@ -1,3 +1,3 @@
 # Patient Scheduling System
 
-Todo: -[x] Mockup DB -[x] Create DB models & controllers -[x] Create DB api routes
+API documentation available [here](https://documenter.getpostman.com/view/4921799/TzeXk7LP).
