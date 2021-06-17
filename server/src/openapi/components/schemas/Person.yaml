@@ -1,35 +1,33 @@
 type: object
 discriminator:
   propertyName: personType
-properties:
-  id:
-    $ref: ./UID.yaml
-    nullable: true
-  name:
-    description: The person's full legal name.
-    $ref: ./Name.yaml
-  email:
-    description: The person's email address.
-    $ref: ./Email.yaml
-  phone:
-    description: The person's phone number.
-    $ref: ./Phone.yaml
-  address:
-    description: The person's address.
-    anyOf:
-      - $ref: ./Address.yaml
-    nullable: true
-  sex:
-    description: The person's sex.
-    type: string
-    $ref: ../enums/Sex.yaml
-  dob:
-    $ref: ./DOB.yaml
-    nullable: true
-  appointments:
-    $ref: ./Appointments.yaml
-  createdAt:
-    $ref: ./CreatedAt.yaml
-  personType:
-    type: string
-    $ref: ../enums/Roles.yaml
+anyOf:
+  - $ref: ./Address.yaml
+  - type: object
+    properties:
+      id:
+        $ref: ./UID.yaml
+        nullable: true
+      name:
+        description: The person's full legal name.
+        $ref: ./Name.yaml
+      email:
+        description: The person's email address.
+        $ref: ./Email.yaml
+      phone:
+        description: The person's phone number.
+        $ref: ./Phone.yaml
+      sex:
+        description: The person's sex.
+        type: string
+        $ref: ../enums/Sex.yaml
+      dob:
+        $ref: ./DOB.yaml
+        nullable: true
+      appointments:
+        $ref: ./Appointments.yaml
+      createdAt:
+        $ref: ./CreatedAt.yaml
+      personType:
+        type: string
+        $ref: ../enums/Roles.yaml

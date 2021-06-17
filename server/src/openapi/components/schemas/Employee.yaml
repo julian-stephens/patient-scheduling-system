@@ -1,6 +1,6 @@
 description: A representation of an Employee
 allOf:
-  - ref: ./Person.yaml
+  - $ref: ./Person.yaml
   - type: object
     properties:
       role:
