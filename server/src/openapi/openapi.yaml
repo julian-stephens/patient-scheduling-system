@@ -23,7 +23,7 @@ tags:
   - name: pharmacies
     description: Operations about pharmacies.
 paths:
-  $ref: /paths/Patients.yaml
+  $ref: paths/Patients.yaml
   #   $ref: "paths/Patients@{Patient}.yaml"
   # $ref: paths/Employees.yaml
   #   $ref: "paths/Employees@{Employee}.yaml"
