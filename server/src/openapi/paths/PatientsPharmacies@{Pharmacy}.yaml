@@ -7,10 +7,10 @@ get:
     - $ref: ../components/parameters/PatientId.yaml
     - $ref: ../components/parameters/PharmacyId.yaml
   responses:
-    "200":
+    200:
       $ref: ../components/responses/Ok.yaml
       content:
-        "application/json":
+        application/json:
           schema:
             $ref: ../components/schemas/Pharmacy.yaml
     default:
@@ -27,7 +27,7 @@ put:
   requestBody:
     $ref: ../components/requestBodies/PharmacyRequest.yaml
   responses:
-    "204":
+    204:
       $ref: ../components/responses/Updated.yaml
     default:
       $ref: ../components/responses/UnexpectedError.yaml
@@ -41,10 +41,10 @@ delete:
     - $ref: ../components/parameters/PatientId.yaml
     - $ref: ../components/parameters/PharmacyId.yaml
   responses:
-    "204":
+    204:
       $ref: ../components/responses/Deleted.yaml
       content:
-        "application/json":
+        application/json:
           schema:
             $ref: ../components/schemas/Pharamacy.yaml
     default:

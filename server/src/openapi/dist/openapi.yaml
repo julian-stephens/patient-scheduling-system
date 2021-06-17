@@ -1,0 +1,1249 @@
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: Patient Scheduling System
+  contact:
+    name: Julian Stpehens
+    email: hello@julianstephens.net
+    url: 'http://julianstephens.net/'
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+  description: |
+    # OpenAPI Definition
+
+    ## Resources
+
+    - Person:
+
+      - id
+      - name
+      - email
+      - phone
+      - address
+      - sex
+      - dob
+      - appointments
+      - createdAt
+      - personType
+
+    - Patient (extends Person)
+
+      - medications
+      - pharmacy
+      - primaryDoctor
+      - admitStatus
+
+    - Employee (extends Person)
+
+      - supervisor
+      - role
+
+    - Appointment
+
+      - id
+      - dateTime
+      - reason
+      - createdAt
+
+    - Pharmacy
+
+      - id
+      - name
+      - address
+
+    - Medication
+
+      - id
+      - name
+      - issueDate
+      - dosage
+      - duration
+      - patientId
+
+    ## Routes
+
+    - /patients
+      - GET: Array<Patient>
+        - getPatients
+      - POST: null
+        - createPatient
+    - /patients/{patientId}
+      - GET: Patient
+        - showPatientById
+      - PUT: null
+        - updatePatient
+      - DELETE: Patient
+        - deletePatient
+    - /patients/{patientId}/appointments
+      - GET: Array<Appointment>
+        - getAppointmentsByPatient
+      - POST: null
+        - createAppointmentByPatient
+    - /patients/{patientId}/{appointmentId}
+      - GET: Appointment
+        - showAppointmentByPatient
+      - PUT: null
+        - updateAppointmentByPatient
+      - DELETE: Appointment
+        - deleteAppointmentByPatient
+    - /patients/{patientId}/medications
+      - GET: Array<Medication>
+        - getMedicationsByPatient
+      - POST: null
+        - createMedicationByPatient
+    - /patients/{patientId}/{medicationId}
+      - GET: Medication
+        - showMedicationByPatient
+      - PUT: null
+        - updateMedicationByPatient
+      - DELETE: Medication
+        - deleteMedicationByPatient
+    - /patients/{patientId}/pharmacies
+      - GET: Array<Pharamacy>
+        - getPharmaciesByPatient
+      - POST: null
+        - createPharmacyByPatient
+    - /patients/{patientId}/{pharmacyId}
+      - GET: Pharamacy
+        - showPharmaciesByPatient
+      - PUT: null
+        - updatePharmacyByPatient
+      - DELETE: Pharmacy
+        - deletePharmacyByPatient
+    - /employees
+      - GET: Array<Employee>
+        - getEmployees
+      - POST: null
+        - createEmployee
+    - /employees/{employeeId}
+      - GET: Employee
+        - showEmployeeById
+      - PUT: null
+        - updateEmployee
+      - DELETE: Employee
+        - deleteEmployee
+    - /employees/{employeeId}/appointments
+      - GET: Array<Appointment>
+        - getAppoinmentsByEmployee
+      - POST: null
+        - createAppointmentByEmployee
+    - /employees/{employeeId}/{appointmentId}
+      - GET: Appointment
+        - showApointmentByEmployee
+      - PUT: null
+        - updateAppointmentByEmployee
+      - DELETE: Appointment
+        - deleteAppointmentByEmployee
+    - /appointments
+      - GET: Array<Appointment>
+        - getAppointments
+      - POST: null
+        - createAppointment
+    - /appointments/{appointmentId}
+      - GET: Appointment
+        - showAppointmentById
+      - PUT: null
+        - updateAppointment
+      - DELETE: Appointment
+        - deleteAppointment
+    - /medications
+      - GET: Array<Medication>
+        - getMedications
+      - POST: null
+        - createMedication
+    - /medications/{medicationId}
+      - GET: Medication
+        - showMedicationById
+      - PUT: null
+        - updateMedication
+      - DELETE: Medication
+        - deleteMedication
+    - /pharmacies
+      - GET: Array<Pharamacy>
+        - getPharmacies
+      - POST: null
+        - createPharmacy
+    - /pharmacies/{pharmacyId}
+      - GET: Pharamacy
+        - showPharmacyById
+      - PUT: null
+        - updatePharmacy
+      - DELETE: Pharmacy
+        - deletePharmacy
+tags:
+  - name: patients
+    description: Operations about patients.
+  - name: employees
+    description: Operations about employees.
+  - name: appointments
+    description: Operations about appointments.
+  - name: medications
+    description: Operations about medications.
+  - name: pharmacies
+    description: Operations about pharmacies.
+paths:
+  /patients:
+    get:
+      summary: List all patients
+      tags:
+        - patients
+      operationId: getAllPatients
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patients'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    post:
+      summary: Create a patient
+      tags:
+        - patients
+      operationId: createPatient
+      requestBody:
+        $ref: '#/components/requestBodies/PatientRequest'
+      responses:
+        '201':
+          $ref: '#/components/responses/Created'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+  '/patients/{patientId}':
+    get:
+      summary: Info for a specific patient
+      tags:
+        - patients
+      operationId: showPatientById
+      parameters:
+        - $ref: '#/components/parameters/PatientId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Patient.yaml
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    put:
+      summary: Update info for a specific patient
+      tags:
+        - patients
+      operationId: updatePatient
+      parameters:
+        - $ref: '#/components/parameters/PatientId'
+      requestBody:
+        $ref: '#/components/requestBodies/PatientRequest'
+      responses:
+        '204':
+          $ref: '#/components/responses/Updated'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    delete:
+      summary: Delete a specific patient
+      tags:
+        - patients
+      operationId: deletePatient
+      parameters:
+        - $ref: '#/components/parameters/PatientId'
+      responses:
+        '204':
+          $ref: '#/components/responses/Deleted'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+  '/patients/{patientId}/appointments':
+    get:
+      summary: Get all appointments for a specific patient
+      tags:
+        - patients
+      operationId: getAppointmentsByPatient
+      parameters:
+        - $ref: '#/components/parameters/PatientId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Appointments.yaml
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    post:
+      summary: Create an appointment for a specific patient
+      tags:
+        - patients
+      operationId: createAppointmentByPatient
+      parameters:
+        - $ref: '#/components/parameters/PatientId'
+      requestBody:
+        $ref: '#/components/requestBodies/AppointmentRequest'
+      responses:
+        '201':
+          $ref: '#/components/responses/Created'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+  '/patients/{patientId}/appointments/{appointmentId}':
+    get:
+      summary: Get a specific appointment for a specific patient
+      tags:
+        - patients
+      operationId: showAppointmentByPatient
+      parameters:
+        - $ref: '#/components/parameters/PatientId'
+        - $ref: '#/components/parameters/AppointmentId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Appointment.yaml
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    put:
+      summary: Update a specific appointment for a specific patient
+      tags:
+        - patients
+      operationId: updateAppointmentByPatient
+      parameters:
+        - $ref: '#/components/parameters/PatientId'
+        - $ref: '#/components/parameters/AppointmentId'
+      requestBody:
+        $ref: '#/components/requestBodies/AppointmentRequest'
+      responses:
+        '204':
+          $ref: '#/components/responses/Updated'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    delete:
+      summary: Delete a specific appointment for a specific patient
+      tags:
+        - patients
+      operationId: deleteAppointmentByPatient
+      parameters:
+        - $ref: '#/components/parameters/PatientId'
+        - $ref: '#/components/parameters/AppointmentId'
+      responses:
+        '204':
+          $ref: '#/components/responses/Deleted'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Appointment.yaml
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+  '/patients/{patientId}/medications':
+    get:
+      summary: Get all medications for a specific patient
+      tags:
+        - patients
+      operationId: getMedicationsByPatient
+      parameters:
+        - $ref: '#/components/parameters/PatientId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Medications.yaml
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    post:
+      summary: Create an medication for a specific patient
+      tags:
+        - patients
+      operationId: createMedicationByPatient
+      parameters:
+        - $ref: '#/components/parameters/PatientId'
+      requestBody:
+        $ref: '#/components/requestBodies/MedicationRequest'
+      responses:
+        '201':
+          $ref: '#/components/responses/Created'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+  '/patients/{patientId}/medications/{medicationId}':
+    get:
+      summary: Get a specific medication for a specific patient
+      tags:
+        - patients
+      operationId: showMedicationByPatient
+      parameters:
+        - $ref: '#/components/parameters/PatientId'
+        - $ref: '#/components/parameters/MedicationId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Medication.yaml
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    put:
+      summary: Update a specific medication for a specific patient
+      tags:
+        - patients
+      operationId: updateMedicationByPatient
+      parameters:
+        - $ref: '#/components/parameters/PatientId'
+        - $ref: '#/components/parameters/MedicationId'
+      requestBody:
+        $ref: '#/components/requestBodies/MedicationRequest'
+      responses:
+        '204':
+          $ref: '#/components/responses/Updated'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    delete:
+      summary: Delete a specific medication for a specific patient
+      tags:
+        - patients
+      operationId: deleteMedicationByPatient
+      parameters:
+        - $ref: '#/components/parameters/PatientId'
+        - $ref: '#/components/parameters/MedicationId'
+      responses:
+        '204':
+          $ref: '#/components/responses/Deleted'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Medication.yaml
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+  '/patients/{patientId}/pharmacies':
+    get:
+      summary: Get all pharmacies for a specific patient
+      tags:
+        - patients
+      operationId: getPharmaciesByPatient
+      parameters:
+        - $ref: '#/components/parameters/PatientId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Pharmacies.yaml
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    post:
+      summary: Create a pharmacy for a specific patient
+      tags:
+        - patients
+      operationId: createPharmacyByPatient
+      parameters:
+        - $ref: '#/components/parameters/PatientId'
+      requestBody:
+        $ref: '#/components/requestBodies/PharmacyRequest'
+      responses:
+        '201':
+          $ref: '#/components/responses/Created'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+  '/patients/{patientId}/pharmacies/{pharmacyId}':
+    get:
+      summary: Get a specific pharmacy for a specific patient
+      tags:
+        - patients
+      operationId: showPharmaciesByPatient
+      parameters:
+        - $ref: '#/components/parameters/PatientId'
+        - $ref: '#/components/parameters/PharmacyId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Pharmacy.yaml
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    put:
+      summary: Update a specific pharmacy for a specific patient
+      tags:
+        - patients
+      operationId: updatePharmacyByPatient
+      parameters:
+        - $ref: '#/components/parameters/PatientId'
+        - $ref: '#/components/parameters/PharmacyId'
+      requestBody:
+        $ref: '#/components/requestBodies/PharmacyRequest'
+      responses:
+        '204':
+          $ref: '#/components/responses/Updated'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    delete:
+      summary: Delete a specific pharmacy for a specific patient
+      tags:
+        - patients
+      operationId: deletePharmacyByPatient
+      parameters:
+        - $ref: '#/components/parameters/PatientId'
+        - $ref: '#/components/parameters/PharmacyId'
+      responses:
+        '204':
+          $ref: '#/components/responses/Deleted'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Pharamacy.yaml
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+  /employees:
+    get:
+      summary: List all employees
+      tags:
+        - employees
+      operationId: getAllEmployees
+      parameters:
+        - $ref: '#/components/parameters/LimitParam'
+        - $ref: '#/components/parameters/SortParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Employees.yaml
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    post:
+      summary: Create an employee
+      tags:
+        - employees
+      operationId: createEmployee
+      requestBody:
+        $ref: '#/components/requestBodies/EmployeeRequest'
+      responses:
+        '201':
+          $ref: '#/components/responses/Created'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+  '/employees/{employeeId}':
+    get:
+      summary: Info for a specific employee
+      tags:
+        - employees
+      operationId: showEmployeeById
+      parameters:
+        - $ref: '#/components/parameters/EmployeeId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Employee.yaml
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    put:
+      summary: Update info for a specific employee
+      tags:
+        - employees
+      operationId: updateEmployee
+      parameters:
+        - $ref: '#/components/parameters/EmployeeId'
+      requestBody:
+        $ref: '#/components/requestBodies/EmployeeRequest'
+      responses:
+        '204':
+          $ref: '#/components/responses/Updated'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    delete:
+      summary: Delete a specific employee
+      tags:
+        - employees
+      operationId: deleteEmployee
+      parameters:
+        - $ref: '#/components/parameters/EmployeeId'
+      responses:
+        '204':
+          $ref: '#/components/responses/Deleted'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Employee.yaml
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+  '/employees/{employeeId}/appointments':
+    get:
+      summary: Get all appointments for a specific employee
+      tags:
+        - employees
+      operationId: getAppointmentsByEmployee
+      parameters:
+        - $ref: '#/components/parameters/EmployeeId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Appointments.yaml
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    post:
+      summary: Create an appointment for a specific employee
+      tags:
+        - employees
+      operationId: createAppointmentByEmployee
+      parameters:
+        - $ref: '#/components/parameters/EmployeeId'
+      requestBody:
+        $ref: '#/components/requestBodies/AppointmentRequest'
+      responses:
+        '201':
+          $ref: '#/components/responses/Created'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+  '/employees/{employeeId}/appointments/{appointmentId}':
+    get:
+      summary: Get a specific appointment for a specific employee
+      tags:
+        - employees
+      operationId: showAppointmentByEmployee
+      parameters:
+        - $ref: '#/components/parameters/EmployeeId'
+        - $ref: '#/components/parameters/AppointmentId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Appointment.yaml
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    put:
+      summary: Update a specific appointment for a specific employee
+      tags:
+        - employees
+      operationId: updateAppointmentByEmployee
+      parameters:
+        - $ref: '#/components/parameters/EmployeeId'
+        - $ref: '#/components/parameters/AppointmentId'
+      requestBody:
+        $ref: '#/components/requestBodies/AppointmentRequest'
+      responses:
+        '204':
+          $ref: '#/components/responses/Updated'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    delete:
+      summary: Delete a specific appointment for a specific employee
+      tags:
+        - employees
+      operationId: deleteAppointmentByEmployee
+      parameters:
+        - $ref: '#/components/parameters/EmployeeId'
+        - $ref: '#/components/parameters/AppointmentId'
+      responses:
+        '204':
+          $ref: '#/components/responses/Deleted'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Appointment.yaml
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+  /appointments:
+    get:
+      summary: List all appointments
+      tags:
+        - appointments
+      operationId: getAllAppointments
+      parameters:
+        - $ref: '#/components/parameters/LimitParam'
+        - $ref: '#/components/parameters/SortParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Appointments.yaml
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    post:
+      summary: Create a appointment
+      tags:
+        - appointments
+      operationId: createAppointment
+      requestBody:
+        $ref: '#/components/requestBodies/AppointmentRequest'
+      responses:
+        '201':
+          $ref: '#/components/responses/Created'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+  '/appointments/{appointmentId}':
+    get:
+      summary: Info for a specific appointment
+      tags:
+        - appointments
+      operationId: showAppointmentById
+      parameters:
+        - $ref: '#/components/parameters/AppointmentId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Appointment.yaml
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    put:
+      summary: Update info for a specific appointment
+      tags:
+        - appointments
+      operationId: updateAppointment
+      parameters:
+        - $ref: '#/components/parameters/AppointmentId'
+      requestBody:
+        $ref: '#/components/requestBodies/AppointmentRequest'
+      responses:
+        '204':
+          $ref: '#/components/responses/Updated'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    delete:
+      summary: Delete a specific appointment
+      tags:
+        - appointments
+      operationId: deleteAppointment
+      parameters:
+        - $ref: '#/components/parameters/AppointmentId'
+      responses:
+        '204':
+          $ref: '#/components/responses/Deleted'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Appointment.yaml
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+  /medications:
+    get:
+      summary: List all medications
+      tags:
+        - medications
+      operationId: getAllMedications
+      parameters:
+        - $ref: '#/components/parameters/LimitParam'
+        - $ref: '#/components/parameters/SortParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Medications.yaml
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    post:
+      summary: Create a medication
+      tags:
+        - medications
+      operationId: createMedication
+      requestBody:
+        $ref: '#/components/requestBodies/MedicationRequest'
+      responses:
+        '201':
+          $ref: '#/components/responses/Created'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+  '/medications/{medicationId}':
+    get:
+      summary: Info for a specific medication
+      tags:
+        - medications
+      operationId: showMedicationById
+      parameters:
+        - $ref: '#/components/parameters/MedicationId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Medication.yaml
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    put:
+      summary: Update info for a specific medication
+      tags:
+        - medications
+      operationId: updateMedication
+      parameters:
+        - $ref: '#/components/parameters/MedicationId'
+      requestBody:
+        $ref: '#/components/requestBodies/MedicationRequest'
+      responses:
+        '204':
+          $ref: '#/components/responses/Updated'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    delete:
+      summary: Delete a specific medication
+      tags:
+        - medications
+      operationId: deleteMedication
+      parameters:
+        - $ref: '#/components/parameters/MedicationId'
+      responses:
+        '204':
+          $ref: '#/components/responses/Deleted'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Medication.yaml
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+  /pharmacies:
+    get:
+      summary: List all pharmacies
+      tags:
+        - pharmacies
+      operationId: getAllPharmacies
+      parameters:
+        - $ref: '#/components/parameters/LimitParam'
+        - $ref: '#/components/parameters/SortParam'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Pharmacies.yaml
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    post:
+      summary: Create a pharmacy
+      tags:
+        - pharmacies
+      operationId: createPharmacy
+      requestBody:
+        $ref: '#/components/requestBodies/PharmacyRequest'
+      responses:
+        '201':
+          $ref: '#/components/responses/Created'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+  '/pharmacies/{pharmacyId}':
+    get:
+      summary: Info for a specific pharmacy
+      tags:
+        - pharmacies
+      operationId: showPharmacyById
+      parameters:
+        - $ref: '#/components/parameters/PharmacyId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Pharmacy.yaml
+        '404':
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    put:
+      summary: Update info for a specific pharmacy
+      tags:
+        - pharmacies
+      operationId: updatePharmacy
+      parameters:
+        - $ref: '#/components/parameters/PharmacyId'
+      requestBody:
+        $ref: '#/components/requestBodies/PharmacyRequest'
+      responses:
+        '204':
+          $ref: '#/components/responses/Updated'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+    delete:
+      summary: Delete a specific pharmacy
+      tags:
+        - pharmacies
+      operationId: deletePharmacy
+      parameters:
+        - $ref: '#/components/parameters/PharmacyId'
+      responses:
+        '204':
+          $ref: '#/components/responses/Deleted'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Pharmacy.yaml
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+components:
+  schemas:
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          minimum: 100
+          maximum: 600
+        message:
+          type: string
+    Address:
+      type: object
+      properties:
+        city:
+          description: 'City, district, suburb, town, or village.'
+          maxLength: 5000
+          nullable: true
+          type: string
+        country:
+          description: >-
+            Two-letter country code ([ISO 3166-1
+            alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+          maxLength: 5000
+          nullable: true
+          type: string
+        line1:
+          description: 'Address line 1 (e.g., street, PO Box, or company name).'
+          maxLength: 5000
+          nullable: true
+          type: string
+        line2:
+          description: 'Address line 2 (e.g., apartment, suite, unit, or building).'
+          maxLength: 5000
+          nullable: true
+          type: string
+        postal_code:
+          description: ZIP or postal code.
+          maxLength: 5000
+          nullable: true
+          type: string
+        state:
+          description: 'State, county, province, or region.'
+          maxLength: 5000
+          nullable: true
+          type: string
+    UID:
+      type: string
+      description: The unique identifier of the resource
+      maxLength: 5000
+    Name:
+      description: The full name of a resource
+      type: string
+      maxLength: 100
+      example: John Doe
+    Email:
+      description: User email address
+      type: string
+      format: email
+      example: john.doe@example.com
+    Phone:
+      description: User phone number
+      type: string
+      pattern: '^\d{3}-\d{3}-\d{4}$'
+      example: 111-222-3333
+    Sex:
+      enum:
+        - male
+        - female
+    DOB:
+      type: object
+      properties:
+        day:
+          description: 'The day of birth, between 1 and 31.'
+          nullable: true
+          type: integer
+        month:
+          description: 'The month of birth, between 1 and 12.'
+          nullable: true
+          type: integer
+        year:
+          description: The four-digit year of birth.
+          nullable: true
+          type: integer
+    AppointmentAdmitReasons:
+      enum:
+        - SICK
+        - PHYSICAL
+        - DRUG
+        - ALLERGY
+    CreatedAt:
+      type: string
+      format: date-time
+    Appointment:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/UID'
+          nullable: true
+        dateTime:
+          type: string
+          format: date-time
+        reason:
+          $ref: '#/components/schemas/AppointmentAdmitReasons'
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+    Appointments:
+      type: array
+      description: The upcoming and previous appointments that a person has scheduled
+      items:
+        $ref: '#/components/schemas/Appointment'
+    Roles:
+      enum:
+        - DOCTOR
+        - RECEPTIONIST
+        - SUPERVISOR
+    Person:
+      type: object
+      discriminator:
+        propertyName: personType
+      anyOf:
+        - $ref: '#/components/schemas/Address'
+        - type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/UID'
+              nullable: true
+            name:
+              description: The person's full legal name.
+              $ref: '#/components/schemas/Name'
+            email:
+              description: The person's email address.
+              $ref: '#/components/schemas/Email'
+            phone:
+              description: The person's phone number.
+              $ref: '#/components/schemas/Phone'
+            sex:
+              description: The person's sex.
+              type: string
+              $ref: '#/components/schemas/Sex'
+            dob:
+              $ref: '#/components/schemas/DOB'
+              nullable: true
+            appointments:
+              $ref: '#/components/schemas/Appointments'
+            createdAt:
+              $ref: '#/components/schemas/CreatedAt'
+            personType:
+              type: string
+              $ref: '#/components/schemas/Roles'
+    Date:
+      type: string
+      format: date
+      example: 2021-06-08T00:00:00.000Z
+    Patient:
+      description: A representation of a Patient
+      allOf:
+        - $ref: '#/components/schemas/Person'
+        - type: object
+          properties:
+            medications:
+              description: The medications that a patient is currently prescribed
+              type: array
+              items:
+                $ref: '#/components/schemas/Medication'
+            pharmacy:
+              $ref: '#/components/schemas/Pharmacy'
+            primaryDoctor:
+              $ref: '#/components/schemas/Employee'
+            admitStatus:
+              type: boolean
+    Medication:
+      description: A medication to be prescribed to a patient
+      type: object
+      required:
+        - name
+        - dosage
+      properties:
+        id:
+          $ref: '#/components/schemas/UID'
+          nullable: true
+        name:
+          $ref: '#/components/schemas/Name'
+        issueDate:
+          description: The date that the medication was prescribed
+          $ref: '#/components/schemas/Date'
+        dosage:
+          type: string
+          description: The recommended dosage associated with the prescribed medication
+        duration:
+          type: integer
+          description: The number of days that the medication should be prescribed
+        patient:
+          $ref: '#/components/schemas/Patient'
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+    Pharmacy:
+      description: A pharmacy that fills patient presciptions
+      anyOf:
+        - $ref: '#/components/schemas/Address'
+        - type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/UID'
+              nullable: true
+            name:
+              $ref: '#/components/schemas/Name'
+            address: null
+            createdAt:
+              $ref: '#/components/schemas/CreatedAt'
+    Employee:
+      description: A representation of an Employee
+      allOf:
+        - $ref: '#/components/schemas/Person'
+        - type: object
+          properties:
+            role:
+              type: string
+              $ref: '#/components/schemas/Roles'
+            supervisor:
+              $ref: '#/components/schemas/Person'
+            createdAt:
+              $ref: '#/components/schemas/CreatedAt'
+    Patients:
+      description: List all patients
+      type: array
+      items:
+        $ref: '#/components/schemas/Patient'
+    SortType:
+      sortType:
+        type: string
+        description: The direction of the sort
+        enum:
+          - asc
+          - desc
+  responses:
+    UnexpectedError:
+      description: Unexpected Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Ok:
+      description: Operation completed successfully.
+    Created:
+      description: Resource created successfully.
+    NotFound:
+      description: Resource not found.
+    Updated:
+      description: Resource updated successfully.
+    Deleted:
+      description: Resource deleted successfully.
+  requestBodies:
+    PatientRequest:
+      description: Patient to add to the system
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Patient'
+    AppointmentRequest:
+      description: Appointment to add to the system
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Appointment'
+    MedicationRequest:
+      description: Medication to add to the system
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Medication'
+    PharmacyRequest:
+      description: Pharmacy to add to the system
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Pharmacy'
+    EmployeeRequest:
+      description: Employee to add to the system
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Employee'
+  parameters:
+    PatientId:
+      name: patientId
+      in: path
+      required: true
+      description: The id of the patient to retrieve
+      schema:
+        $ref: '#/components/schemas/UID'
+    AppointmentId:
+      name: appointmentId
+      in: path
+      required: true
+      description: The id of the appointment to retrieve
+      schema:
+        $ref: '#/components/schemas/UID'
+    MedicationId:
+      name: medicationId
+      in: path
+      required: true
+      description: The id of the medication to retrieve
+      schema:
+        $ref: '#/components/schemas/UID'
+    PharmacyId:
+      name: pharmacyId
+      in: path
+      required: true
+      description: The id of the pharmacy to retrieve
+      schema:
+        $ref: '#/components/schemas/UID'
+    LimitParam:
+      name: limit
+      in: query
+      description: max records to return
+      required: true
+      schema:
+        type: integer
+        format: int32
+        minimum: 10
+        maximum: 20
+        example: 15
+    SortParam:
+      name: sort
+      in: query
+      schema:
+        $ref: '#/components/schemas/SortType'
+    EmployeeId:
+      name: employeeId
+      in: path
+      required: true
+      description: The id of the employee to retrieve
+      schema:
+        $ref: '#/components/schemas/UID'

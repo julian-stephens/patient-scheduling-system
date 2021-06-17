@@ -1,5 +1,5 @@
 description: Appointment to add to the system
 content:
-  "application/json":
+  application/json:
     schema:
       $ref: ../schemas/Appointment.yaml

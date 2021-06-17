@@ -6,13 +6,13 @@ get:
   parameters:
     - $ref: ../components/parameters/PatientId.yaml
   responses:
-    "200":
+    200:
       $ref: ../components/responses/Ok.yaml
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Patient.yaml
-    "404":
+    404:
       $ref: ../components/responses/NotFound.yaml
     default:
       $ref: ../components/responses/UnexpectedError.yaml
@@ -27,7 +27,7 @@ put:
   requestBody:
     $ref: ../components/requestBodies/PatientRequest.yaml
   responses:
-    "204":
+    204:
       $ref: ../components/responses/Updated.yaml
     default:
       $ref: ../components/responses/UnexpectedError.yaml
@@ -40,10 +40,10 @@ delete:
   parameters:
     - $ref: ../components/parameters/PatientId.yaml
   responses:
-    "204":
+    204:
       $ref: ../components/responses/Deleted.yaml
       content:
-        "application/json":
+        application/json:
           schema:
             $ref: ../components/schemas/Patient.yaml
     default:

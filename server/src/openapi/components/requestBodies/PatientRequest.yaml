@@ -1,5 +1,5 @@
 description: Patient to add to the system
 content:
-  "application/json":
+  application/json:
     schema:
       $ref: ../schemas/Patient.yaml

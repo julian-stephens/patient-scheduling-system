@@ -7,7 +7,7 @@ get:
     - $ref: ../components/parameters/LimitParam.yaml
     - $ref: ../components/parameters/SortParam.yaml
   responses:
-    "200":
+    200:
       $ref: ../components/responses/Ok.yaml
       headers:
         x-next:
@@ -29,7 +29,7 @@ post:
   requestBody:
     $ref: ../components/requestBodies/MedicationRequest.yaml
   responses:
-    "201":
+    201:
       $ref: ../components/responses/Created.yaml
     default:
       $ref: ../components/responses/UnexpectedError.yaml

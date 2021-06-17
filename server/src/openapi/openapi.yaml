@@ -5,10 +5,10 @@ info:
   contact:
     name: Julian Stpehens
     email: hello@julianstephens.net
-    url: "http://julianstephens.net/"
+    url: http://julianstephens.net/
   license:
     name: Apache 2.0
-    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
   description:
     $ref: ./README.md
 tags:
@@ -42,7 +42,7 @@ paths:
   /employees:
     $ref: paths/Employees.yaml
   /employees/{employeeId}:
-    $ref: "paths/Employees@{Employee}.yaml"
+    $ref: paths/Employees@{Employee}.yaml
   /employees/{employeeId}/appointments:
     $ref: paths/EmployeesAppointments.yaml
   /employees/{employeeId}/appointments/{appointmentId}:
@@ -50,12 +50,12 @@ paths:
   /appointments:
     $ref: paths/Appointments.yaml
   /appointments/{appointmentId}:
-    $ref: "paths/Appointments@{Appointment}.yaml"
+    $ref: paths/Appointments@{Appointment}.yaml
   /medications:
     $ref: paths/Medications.yaml
   /medications/{medicationId}:
-    $ref: "paths/Medications@{Medication}.yaml"
+    $ref: paths/Medications@{Medication}.yaml
   /pharmacies:
     $ref: paths/Pharmacies.yaml
   /pharmacies/{pharmacyId}:
-    $ref: "paths/Pharmacies@{Pharmacy}.yaml"
+    $ref: paths/Pharmacies@{Pharmacy}.yaml

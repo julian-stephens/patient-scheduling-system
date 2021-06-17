@@ -6,13 +6,14 @@ get:
   parameters:
     - $ref: ../components/parameters/AppointmentId.yaml
   responses:
-    "200":
+    200:
       $ref: ../components/responses/Ok.yaml
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Appointment.yaml
-    $ref: ../components/responses/NotFound.yaml
+    404:
+      $ref: ../components/responses/NotFound.yaml
     default:
       $ref: ../components/responses/UnexpectedError.yaml
 
@@ -26,7 +27,7 @@ put:
   requestBody:
     $ref: ../components/requestBodies/AppointmentRequest.yaml
   responses:
-    "204":
+    204:
       $ref: ../components/responses/Updated.yaml
     default:
       $ref: ../components/responses/UnexpectedError.yaml
@@ -39,10 +40,10 @@ delete:
   parameters:
     - $ref: ../components/parameters/AppointmentId.yaml
   responses:
-    "204":
+    204:
       $ref: ../components/responses/Deleted.yaml
       content:
-        "application/json":
+        application/json:
           schema:
             $ref: ../components/schemas/Appointment.yaml
     default:
