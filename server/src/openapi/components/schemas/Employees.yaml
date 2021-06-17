@@ -1,4 +1,4 @@
 description: List all employees
 type: array
-  items: 
-    $ref: ./Employee.yaml
+items:
+  $ref: ./Employee.yaml

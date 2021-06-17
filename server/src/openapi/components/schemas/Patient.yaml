@@ -7,7 +7,7 @@ allOf:
         description: The medications that a patient is currently prescribed
         type: array
         items:
-          $ref: ./Medication
+          $ref: ./Medication.yaml
       pharmacy:
         $ref: ./Pharmacy.yaml
       primaryDoctor:

@@ -1,5 +1,4 @@
 type: object
-description: ''
 properties:
   city:
 	description: City, district, suburb, town, or village.
