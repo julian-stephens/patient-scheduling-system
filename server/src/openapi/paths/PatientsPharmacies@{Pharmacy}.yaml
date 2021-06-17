@@ -1,27 +1,27 @@
-get:
-  summary: Info for a specific pharmacy
+get: 
+  summary: Get a specific pharmacy for a specific patient
   tags:
-    - pharmacies
-  operationId: showPharmacyById
-  parameters: 
+    - patients
+  operationId: showPharmaciesByPatient
+  parameters:
+    $ref: ../components/parameters/PatientId.yaml
     $ref: ../components/parameters/PharmacyId.yaml
   responses:
-    "200":
-      description: OK
+    $ref: ../components/responses/Ok.yaml
       content:
-        application/json:
+        "application/json":
           schema:
             $ref: ../components/schemas/Pharmacy.yaml
-    $ref: ../components/responses/NotFound.yaml
     default:
       $ref: ../components/responses/UnexpectedError.yaml
 
 put:
-  summary: Update info for a specific pharmacy
+  summary: Update a specific pharmacy for a specific patient
   tags:
-    - pharmacies
-  operationId: updatePharmacy 
-  parameters: 
+    - patients
+  operationId: updatePharmacyByPatient
+  parameters:
+    $ref: ../components/parameters/PatientId.yaml
     $ref: ../components/parameters/PharmacyId.yaml
   requestBody:
     $ref: ../components/requestBodies/PharmacyRequest.yaml
@@ -31,17 +31,18 @@ put:
       $ref: ../components/responses/UnexpectedError.yaml
 
 delete:
-  summary: Delete a specific pharmacy
+  summary: Delete a specific pharmacy for a specific patient
   tags:
-    - pharmacies
-  operationId: deletePharmacy
+    - patients
+  operationId: deletePharmacyByPatient
   parameters:
+    $ref: ../components/parameters/PatientId.yaml
     $ref: ../components/parameters/PharmacyId.yaml
   responses:
     $ref: ../components/responses/Deleted.yaml
       content:
         "application/json":
           schema:
-            $ref: ../components/schemas/Pharmacy.yaml
+            $ref: ../components/schemas/Pharamacy.yaml
     default:
       $ref: ../components/responses/UnexpectedError.yaml

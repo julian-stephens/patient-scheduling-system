@@ -1,121 +1,47 @@
-"/employee/{employeeId}":
-  get:
-    summary: Info for a specific employee
-    tags:
-      - employees
-    operationId: showEmployeeById
-    parameters: 
-      $ref: ../components/parameters/EmployeeId.yaml
-    responses:
-      "200":
-        description: OK
-        content:
-          application/json:
-            schema:
-              $ref: ../components/schemas/Employee.yaml
-      $ref: ../components/responses/NotFound.yaml
-      $ref: ../components/responses/GeneralError.yaml
+get:
+  summary: Info for a specific employee
+  tags:
+    - employees
+  operationId: showEmployeeById
+  parameters: 
+    $ref: ../components/parameters/EmployeeId.yaml
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Employee.yaml
+    $ref: ../components/responses/NotFound.yaml
+    default:
+      $ref: ../components/responses/UnexpectedError.yaml
 
-  put:
-    summary: Update info for a specific employee
-    tags:
-      - employees
-    operationId: updateEmployee 
-    parameters: 
-      $ref: ../components/parameters/EmployeeId.yaml
-    requestBody:
-      $ref: ../components/requestBodies/EmployeeRequest.yaml
-    responses:
-      $ref: ../components/responses/Updated.yaml
-      $ref: ../components/responses/GeneralError.yaml
+put:
+  summary: Update info for a specific employee
+  tags:
+    - employees
+  operationId: updateEmployee 
+  parameters: 
+    $ref: ../components/parameters/EmployeeId.yaml
+  requestBody:
+    $ref: ../components/requestBodies/EmployeeRequest.yaml
+  responses:
+    $ref: ../components/responses/Updated.yaml
+    default:
+      $ref: ../components/responses/UnexpectedError.yaml
 
-  delete:
-    summary: Delete a specific employee
-    tags:
-      - employees
-    operationId: deleteEmployee
-    parameters:
-      $ref: ../components/parameters/EmployeeId.yaml
-    responses:
-      $ref: ../components/responses/Deleted.yaml
-        content:
-          "application/json":
-            schema:
-              $ref: ../components/schemas/Employee.yaml
-      $ref: ../components/responses/GeneralError.yaml
-
-"/employee/{employeeId}/appointments":
-  get:
-    summary: Get all appointments for a specific employee
-    tags:
-      - employees
-    operationId: getAppointmentsByEmployee
-    parameters:
-      $ref: ../components/parameters/EmployeeId.yaml
-    responses:
-      $ref: ../components/responses/Ok.yaml
-        content: 
-          "application/json":
-            schema:
-              $ref: ../components/schemas/Appointments.yaml
-      $ref: ../components/responses/GeneralError.yaml
-
-  post:
-    summary: Create an appointment for a specific employee
-    tags:
-      - employees
-    operationId: createAppointmentByEmployee
-    parameters:
-      $ref: ../components/parameters/EmployeeId.yaml
-    requestBody:
-      $ref: ../components/requestBodies/AppointmentRequest.yaml
-    responses:
-      $ref: ../components/responses/Created.yaml
-      $ref: ../components/responses/GeneralError.yaml
-
-"/employee/{employeeId}/{appointmentId}":
-  get: 
-    summary: Get a specific appointment for a specific employee
-    tags:
-      - employees
-    operationId: showAppointmentByEmployee
-    parameters:
-      $ref: ../components/parameters/EmployeeId.yaml
-      $ref: ../components/parameters/AppointmentId.yaml
-    responses:
-      $ref: ../components/responses/Ok.yaml
-        content:
-          "application/json":
-            schema:
-              $ref: ../components/schemas/Appointment.yaml
-      $ref: ../components/responses/GeneralError.yaml
-
-  put:
-    summary: Update a specific appointment for a specific employee
-    tags:
-      - employees
-    operationId: updateAppointmentByEmployee
-    parameters:
-      $ref: ../components/parameters/EmployeeId.yaml
-      $ref: ../components/parameters/AppointmentId.yaml
-    requestBody:
-      $ref: ../components/requestBodies/AppointmentRequest.yaml
-    responses:
-      $ref: ../components/responses/Updated.yaml
-      $ref: ../components/responses/GeneralError.yaml
-
-  delete:
-    summary: Delete a specific appointment for a specific employee
-    tags:
-      - employees
-    operationId: deleteAppointmentByEmployee
-    parameters:
-      $ref: ../components/parameters/EmployeeId.yaml
-      $ref: ../components/parameters/AppointmentId.yaml
-    responses:
-      $ref: ../components/responses/Deleted.yaml
-        content:
-          "application/json":
-            schema:
-              $ref: ../components/schemas/Appointment.yaml
-      $ref: ../components/responses/GeneralError.yaml
+delete:
+  summary: Delete a specific employee
+  tags:
+    - employees
+  operationId: deleteEmployee
+  parameters:
+    $ref: ../components/parameters/EmployeeId.yaml
+  responses:
+    $ref: ../components/responses/Deleted.yaml
+      content:
+        "application/json":
+          schema:
+            $ref: ../components/schemas/Employee.yaml
+    default:
+      $ref: ../components/responses/UnexpectedError.yaml

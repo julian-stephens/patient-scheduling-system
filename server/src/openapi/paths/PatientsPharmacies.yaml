@@ -1,0 +1,29 @@
+get:
+  summary: Get all pharmacies for a specific patient
+  tags:
+    - patients
+  operationId: getPharmaciesByPatient
+  parameters:
+    $ref: ../components/parameters/PatientId.yaml
+  responses:
+    $ref: ../components/responses/Ok.yaml
+      content: 
+        "application/json":
+          schema:
+            $ref: ../components/schemas/Pharmacies.yaml
+    default:
+      $ref: ../components/responses/UnexpectedError.yaml
+
+post:
+  summary: Create a pharmacy for a specific patient
+  tags:
+    - patients
+  operationId: createPharmacyByPatient
+  parameters:
+    $ref: ../components/parameters/PatientId.yaml
+  requestBody:
+    $ref: ../components/requestBodies/PharmacyRequest.yaml
+  responses:
+    $ref: ../components/responses/Created.yaml
+    default:
+      $ref: ../components/responses/UnexpectedError.yaml

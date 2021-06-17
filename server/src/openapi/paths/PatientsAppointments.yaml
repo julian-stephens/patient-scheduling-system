@@ -1,0 +1,29 @@
+get:
+  summary: Get all appointments for a specific patient
+  tags:
+    - patients
+  operationId: getAppointmentsByPatient
+  parameters:
+    $ref: ../components/parameters/PatientId.yaml
+  responses:
+    $ref: ../components/responses/Ok.yaml
+      content: 
+        "application/json":
+          schema:
+            $ref: ../components/schemas/Appointments.yaml
+    default:
+      $ref: ../components/responses/UnexpectedError.yaml
+
+post:
+  summary: Create an appointment for a specific patient
+  tags:
+    - patients
+  operationId: createAppointmentByPatient
+  parameters:
+    $ref: ../components/parameters/PatientId.yaml
+  requestBody:
+    $ref: ../components/requestBodies/AppointmentRequest.yaml
+  responses:
+    $ref: ../components/responses/Created.yaml
+    default:
+      $ref: ../components/responses/UnexpectedError.yaml

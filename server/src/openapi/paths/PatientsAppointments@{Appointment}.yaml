@@ -1,27 +1,27 @@
-get:
-  summary: Info for a specific appointment
+get: 
+  summary: Get a specific appointment for a specific patient
   tags:
-    - appointments
-  operationId: showAppointmentById
-  parameters: 
+    - patients
+  operationId: showAppointmentByPatient
+  parameters:
+    $ref: ../components/parameters/PatientId.yaml
     $ref: ../components/parameters/AppointmentId.yaml
   responses:
-    "200":
-      description: OK
+    $ref: ../components/responses/Ok.yaml
       content:
-        application/json:
+        "application/json":
           schema:
             $ref: ../components/schemas/Appointment.yaml
-    $ref: ../components/responses/NotFound.yaml
     default:
       $ref: ../components/responses/UnexpectedError.yaml
 
 put:
-  summary: Update info for a specific appointment
+  summary: Update a specific appointment for a specific patient
   tags:
-    - appointments
-  operationId: updateAppointment 
-  parameters: 
+    - patients
+  operationId: updateAppointmentByPatient
+  parameters:
+    $ref: ../components/parameters/PatientId.yaml
     $ref: ../components/parameters/AppointmentId.yaml
   requestBody:
     $ref: ../components/requestBodies/AppointmentRequest.yaml
@@ -31,11 +31,12 @@ put:
       $ref: ../components/responses/UnexpectedError.yaml
 
 delete:
-  summary: Delete a specific appointment
+  summary: Delete a specific appointment for a specific patient
   tags:
-    - appointments
-  operationId: deleteAppointment
+    - patients
+  operationId: deleteAppointmentByPatient
   parameters:
+    $ref: ../components/parameters/PatientId.yaml
     $ref: ../components/parameters/AppointmentId.yaml
   responses:
     $ref: ../components/responses/Deleted.yaml

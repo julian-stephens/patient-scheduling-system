@@ -1,27 +1,27 @@
-get:
-  summary: Info for a specific appointment
+get: 
+  summary: Get a specific appointment for a specific employee
   tags:
-    - appointments
-  operationId: showAppointmentById
-  parameters: 
+    - employees
+  operationId: showAppointmentByEmployee
+  parameters:
+    $ref: ../components/parameters/EmployeeId.yaml
     $ref: ../components/parameters/AppointmentId.yaml
   responses:
-    "200":
-      description: OK
+    $ref: ../components/responses/Ok.yaml
       content:
-        application/json:
+        "application/json":
           schema:
             $ref: ../components/schemas/Appointment.yaml
-    $ref: ../components/responses/NotFound.yaml
     default:
       $ref: ../components/responses/UnexpectedError.yaml
 
 put:
-  summary: Update info for a specific appointment
+  summary: Update a specific appointment for a specific employee
   tags:
-    - appointments
-  operationId: updateAppointment 
-  parameters: 
+    - employees
+  operationId: updateAppointmentByEmployee
+  parameters:
+    $ref: ../components/parameters/EmployeeId.yaml
     $ref: ../components/parameters/AppointmentId.yaml
   requestBody:
     $ref: ../components/requestBodies/AppointmentRequest.yaml
@@ -31,11 +31,12 @@ put:
       $ref: ../components/responses/UnexpectedError.yaml
 
 delete:
-  summary: Delete a specific appointment
+  summary: Delete a specific appointment for a specific employee
   tags:
-    - appointments
-  operationId: deleteAppointment
+    - employees
+  operationId: deleteAppointmentByEmployee
   parameters:
+    $ref: ../components/parameters/EmployeeId.yaml
     $ref: ../components/parameters/AppointmentId.yaml
   responses:
     $ref: ../components/responses/Deleted.yaml

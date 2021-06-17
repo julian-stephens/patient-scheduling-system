@@ -1,27 +1,27 @@
-get:
-  summary: Info for a specific medication
+get: 
+  summary: Get a specific medication for a specific patient
   tags:
-    - medications
-  operationId: showMedicationById
-  parameters: 
+    - patients
+  operationId: showMedicationByPatient
+  parameters:
+    $ref: ../components/parameters/PatientId.yaml
     $ref: ../components/parameters/MedicationId.yaml
   responses:
-    "200":
-      description: OK
+    $ref: ../components/responses/Ok.yaml
       content:
-        application/json:
+        "application/json":
           schema:
             $ref: ../components/schemas/Medication.yaml
-    $ref: ../components/responses/NotFound.yaml
     default:
       $ref: ../components/responses/UnexpectedError.yaml
 
 put:
-  summary: Update info for a specific medication
+  summary: Update a specific medication for a specific patient
   tags:
-    - medications
-  operationId: updateMedication 
-  parameters: 
+    - patients
+  operationId: updateMedicationByPatient
+  parameters:
+    $ref: ../components/parameters/PatientId.yaml
     $ref: ../components/parameters/MedicationId.yaml
   requestBody:
     $ref: ../components/requestBodies/MedicationRequest.yaml
@@ -31,11 +31,12 @@ put:
       $ref: ../components/responses/UnexpectedError.yaml
 
 delete:
-  summary: Delete a specific medication
+  summary: Delete a specific medication for a specific patient
   tags:
-    - medications
-  operationId: deleteMedication
+    - patients
+  operationId: deleteMedicationByPatient
   parameters:
+    $ref: ../components/parameters/PatientId.yaml
     $ref: ../components/parameters/MedicationId.yaml
   responses:
     $ref: ../components/responses/Deleted.yaml

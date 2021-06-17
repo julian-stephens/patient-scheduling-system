@@ -23,13 +23,39 @@ tags:
   - name: pharmacies
     description: Operations about pharmacies.
 paths:
-  $ref: paths/Patients.yaml
-  #   $ref: "paths/Patients@{Patient}.yaml"
-  # $ref: paths/Employees.yaml
-  #   $ref: "paths/Employees@{Employee}.yaml"
-  # $ref: paths/Appointments.yaml
-  #   $ref: "paths/Appointments@{Appointment}.yaml"
-  # $ref: paths/Medications.yaml
-  #   $ref: "paths/Medications@{Medication}.yaml"
-  # $ref: paths/Pharmacies.yaml
-  #   $ref: "paths/Pharmacies@{Pharmacy}.yaml"
+  /patients:
+    $ref: paths/Patients.yaml
+  /patients/{patientId}:
+    $ref: paths/Patients@{Patient}.yaml
+  /patients/{patientId}/appointments:
+    $ref: paths/PatientsAppointments.yaml
+  /patients/{patientId}/appointments/{appointmentId}:
+    $ref: paths/PatientsAppointments@{Appointment}.yaml
+  /patients/{patientId}/medications:
+    $ref: paths/PatientsMedications.yaml
+  /patients/{patientId}/medications/{medicationId}:
+    $ref: paths/PatientsMedications@{Medication}.yaml
+  /patients/{patientId}/pharmacies:
+    $ref: paths/PatientsPharmacies.yaml
+  /patients/{patientId}/pharmacies/{pharmacyId}:
+    $ref: paths/PatientsPharmacies@{Pharmacy}.yaml
+  /employees:
+    $ref: paths/Employees.yaml
+  /employees/{employeeId}:
+    $ref: "paths/Employees@{Employee}.yaml"
+  /employees/{employeeId}/appointments:
+    $ref: paths/EmployeesAppointments.yaml
+  /employees/{employeeId}/appointments/{appointmentId}:
+    $ref: paths/EmployeesAppointments@{Appointment}.yaml
+  /appointments:
+    $ref: paths/Appointments.yaml
+  /appointments/{appointmentId}:
+    $ref: "paths/Appointments@{Appointment}.yaml"
+  /medications:
+    $ref: paths/Medications.yaml
+  /medications/{medicationId}:
+    $ref: "paths/Medications@{Medication}.yaml"
+  /pharmacies:
+    $ref: paths/Pharmacies.yaml
+  /pharmacies/{pharmacyId}:
+    $ref: "paths/Pharmacies@{Pharmacy}.yaml"

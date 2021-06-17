@@ -18,7 +18,8 @@ get:
         application/json:
           schema:
             $ref: ../components/schemas/Appointments.yaml
-    $ref: ../components/responses/GeneralError.yaml
+    default:
+      $ref: ../components/responses/UnexpectedError.yaml
 
 post:
   summary: Create a appointment
@@ -29,4 +30,5 @@ post:
     $ref: ../components/requestBodies/AppointmentRequest.yaml
   responses:
     $ref: ../components/responses/Created.yaml
-    $ref: ../components/responses/GeneralError.yaml
+    default:
+      $ref: ../components/responses/UnexpectedError.yaml

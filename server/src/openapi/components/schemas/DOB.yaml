@@ -1,5 +1,4 @@
 type: object
-description: ""
 properties:
   day:
     description: The day of birth, between 1 and 31.
