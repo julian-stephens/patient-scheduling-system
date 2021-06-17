@@ -3,16 +3,17 @@ get:
   tags:
     - medications
   operationId: showMedicationById
-  parameters: 
-    $ref: ../components/parameters/MedicationId.yaml
+  parameters:
+    - $ref: ../components/parameters/MedicationId.yaml
   responses:
     "200":
-      description: OK
+      $ref: ../components/responses/Ok.yaml
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Medication.yaml
-    $ref: ../components/responses/NotFound.yaml
+    "404":
+      $ref: ../components/responses/NotFound.yaml
     default:
       $ref: ../components/responses/UnexpectedError.yaml
 
@@ -20,13 +21,14 @@ put:
   summary: Update info for a specific medication
   tags:
     - medications
-  operationId: updateMedication 
-  parameters: 
-    $ref: ../components/parameters/MedicationId.yaml
+  operationId: updateMedication
+  parameters:
+    - $ref: ../components/parameters/MedicationId.yaml
   requestBody:
     $ref: ../components/requestBodies/MedicationRequest.yaml
   responses:
-    $ref: ../components/responses/Updated.yaml
+    "204":
+      $ref: ../components/responses/Updated.yaml
     default:
       $ref: ../components/responses/UnexpectedError.yaml
 
@@ -36,9 +38,10 @@ delete:
     - medications
   operationId: deleteMedication
   parameters:
-    $ref: ../components/parameters/MedicationId.yaml
+    - $ref: ../components/parameters/MedicationId.yaml
   responses:
-    $ref: ../components/responses/Deleted.yaml
+    "204":
+      $ref: ../components/responses/Deleted.yaml
       content:
         "application/json":
           schema:

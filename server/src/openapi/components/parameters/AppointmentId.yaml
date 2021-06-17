@@ -1,6 +1,6 @@
-- name: appointmentId
-  in: path
-  required: true
-  description: The id of the appointment to retrieve
-  schema:
-    $ref: ../components/schemas/UID.yaml
+name: appointmentId
+in: path
+required: true
+description: The id of the appointment to retrieve
+schema:
+  $ref: ../schemas/UID.yaml

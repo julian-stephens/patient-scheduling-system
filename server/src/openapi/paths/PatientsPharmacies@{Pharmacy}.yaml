@@ -1,13 +1,14 @@
-get: 
+get:
   summary: Get a specific pharmacy for a specific patient
   tags:
     - patients
   operationId: showPharmaciesByPatient
   parameters:
-    $ref: ../components/parameters/PatientId.yaml
-    $ref: ../components/parameters/PharmacyId.yaml
+    - $ref: ../components/parameters/PatientId.yaml
+    - $ref: ../components/parameters/PharmacyId.yaml
   responses:
-    $ref: ../components/responses/Ok.yaml
+    "200":
+      $ref: ../components/responses/Ok.yaml
       content:
         "application/json":
           schema:
@@ -21,12 +22,13 @@ put:
     - patients
   operationId: updatePharmacyByPatient
   parameters:
-    $ref: ../components/parameters/PatientId.yaml
-    $ref: ../components/parameters/PharmacyId.yaml
+    - $ref: ../components/parameters/PatientId.yaml
+    - $ref: ../components/parameters/PharmacyId.yaml
   requestBody:
     $ref: ../components/requestBodies/PharmacyRequest.yaml
   responses:
-    $ref: ../components/responses/Updated.yaml
+    "204":
+      $ref: ../components/responses/Updated.yaml
     default:
       $ref: ../components/responses/UnexpectedError.yaml
 
@@ -36,10 +38,11 @@ delete:
     - patients
   operationId: deletePharmacyByPatient
   parameters:
-    $ref: ../components/parameters/PatientId.yaml
-    $ref: ../components/parameters/PharmacyId.yaml
+    - $ref: ../components/parameters/PatientId.yaml
+    - $ref: ../components/parameters/PharmacyId.yaml
   responses:
-    $ref: ../components/responses/Deleted.yaml
+    "204":
+      $ref: ../components/responses/Deleted.yaml
       content:
         "application/json":
           schema:

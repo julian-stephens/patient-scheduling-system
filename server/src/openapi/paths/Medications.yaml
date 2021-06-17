@@ -4,11 +4,11 @@ get:
     - medications
   operationId: getAllMedications
   parameters:
-    $ref: ../components/parameters/LimitParam.yaml
-    $ref: ../components/parameters/SortParam.yaml
+    - $ref: ../components/parameters/LimitParam.yaml
+    - $ref: ../components/parameters/SortParam.yaml
   responses:
     "200":
-      description: A paged array of medications
+      $ref: ../components/responses/Ok.yaml
       headers:
         x-next:
           description: A link to the next page of responses
@@ -29,6 +29,7 @@ post:
   requestBody:
     $ref: ../components/requestBodies/MedicationRequest.yaml
   responses:
-    $ref: ../components/responses/Created.yaml
+    "201":
+      $ref: ../components/responses/Created.yaml
     default:
       $ref: ../components/responses/UnexpectedError.yaml

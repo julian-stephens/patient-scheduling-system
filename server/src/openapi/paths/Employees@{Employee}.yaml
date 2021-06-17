@@ -3,11 +3,11 @@ get:
   tags:
     - employees
   operationId: showEmployeeById
-  parameters: 
-    $ref: ../components/parameters/EmployeeId.yaml
+  parameters:
+    - $ref: ../components/parameters/EmployeeId.yaml
   responses:
     "200":
-      description: OK
+      $ref: ../components/responses/Ok.yaml
       content:
         application/json:
           schema:
@@ -20,13 +20,14 @@ put:
   summary: Update info for a specific employee
   tags:
     - employees
-  operationId: updateEmployee 
-  parameters: 
-    $ref: ../components/parameters/EmployeeId.yaml
+  operationId: updateEmployee
+  parameters:
+    - $ref: ../components/parameters/EmployeeId.yaml
   requestBody:
     $ref: ../components/requestBodies/EmployeeRequest.yaml
   responses:
-    $ref: ../components/responses/Updated.yaml
+    "204":
+      $ref: ../components/responses/Updated.yaml
     default:
       $ref: ../components/responses/UnexpectedError.yaml
 
@@ -36,9 +37,10 @@ delete:
     - employees
   operationId: deleteEmployee
   parameters:
-    $ref: ../components/parameters/EmployeeId.yaml
+    - $ref: ../components/parameters/EmployeeId.yaml
   responses:
-    $ref: ../components/responses/Deleted.yaml
+    "204":
+      $ref: ../components/responses/Deleted.yaml
       content:
         "application/json":
           schema:

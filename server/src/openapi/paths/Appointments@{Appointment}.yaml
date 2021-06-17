@@ -3,11 +3,11 @@ get:
   tags:
     - appointments
   operationId: showAppointmentById
-  parameters: 
-    $ref: ../components/parameters/AppointmentId.yaml
+  parameters:
+    - $ref: ../components/parameters/AppointmentId.yaml
   responses:
     "200":
-      description: OK
+      $ref: ../components/responses/Ok.yaml
       content:
         application/json:
           schema:
@@ -20,13 +20,14 @@ put:
   summary: Update info for a specific appointment
   tags:
     - appointments
-  operationId: updateAppointment 
-  parameters: 
-    $ref: ../components/parameters/AppointmentId.yaml
+  operationId: updateAppointment
+  parameters:
+    - $ref: ../components/parameters/AppointmentId.yaml
   requestBody:
     $ref: ../components/requestBodies/AppointmentRequest.yaml
   responses:
-    $ref: ../components/responses/Updated.yaml
+    "204":
+      $ref: ../components/responses/Updated.yaml
     default:
       $ref: ../components/responses/UnexpectedError.yaml
 
@@ -36,9 +37,10 @@ delete:
     - appointments
   operationId: deleteAppointment
   parameters:
-    $ref: ../components/parameters/AppointmentId.yaml
+    - $ref: ../components/parameters/AppointmentId.yaml
   responses:
-    $ref: ../components/responses/Deleted.yaml
+    "204":
+      $ref: ../components/responses/Deleted.yaml
       content:
         "application/json":
           schema:

@@ -4,10 +4,11 @@ get:
     - patients
   operationId: getAppointmentsByPatient
   parameters:
-    $ref: ../components/parameters/PatientId.yaml
+    - $ref: ../components/parameters/PatientId.yaml
   responses:
-    $ref: ../components/responses/Ok.yaml
-      content: 
+    "200":
+      $ref: ../components/responses/Ok.yaml
+      content:
         "application/json":
           schema:
             $ref: ../components/schemas/Appointments.yaml
@@ -20,10 +21,11 @@ post:
     - patients
   operationId: createAppointmentByPatient
   parameters:
-    $ref: ../components/parameters/PatientId.yaml
+    - $ref: ../components/parameters/PatientId.yaml
   requestBody:
     $ref: ../components/requestBodies/AppointmentRequest.yaml
   responses:
-    $ref: ../components/responses/Created.yaml
+    "201":
+      $ref: ../components/responses/Created.yaml
     default:
       $ref: ../components/responses/UnexpectedError.yaml

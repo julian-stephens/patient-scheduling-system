@@ -4,15 +4,16 @@ get:
     - patients
   operationId: showPatientById
   parameters:
-    $ref: ../components/parameters/PatientId.yaml
+    - $ref: ../components/parameters/PatientId.yaml
   responses:
     "200":
-      description: OK
+      $ref: ../components/responses/Ok.yaml
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Patient.yaml
-    $ref: ../components/responses/NotFound.yaml
+    "404":
+      $ref: ../components/responses/NotFound.yaml
     default:
       $ref: ../components/responses/UnexpectedError.yaml
 
@@ -22,11 +23,12 @@ put:
     - patients
   operationId: updatePatient
   parameters:
-    $ref: ../components/parameters/PatientId.yaml
+    - $ref: ../components/parameters/PatientId.yaml
   requestBody:
     $ref: ../components/requestBodies/PatientRequest.yaml
   responses:
-    $ref: ../components/responses/Updated.yaml
+    "204":
+      $ref: ../components/responses/Updated.yaml
     default:
       $ref: ../components/responses/UnexpectedError.yaml
 
@@ -36,12 +38,13 @@ delete:
     - patients
   operationId: deletePatient
   parameters:
-    $ref: ../components/parameters/PatientId.yaml
+    - $ref: ../components/parameters/PatientId.yaml
   responses:
-    $ref: ../components/responses/Deleted.yaml
-    content:
-      "application/json":
-        schema:
-          $ref: ../components/schemas/Patient.yaml
+    "204":
+      $ref: ../components/responses/Deleted.yaml
+      content:
+        "application/json":
+          schema:
+            $ref: ../components/schemas/Patient.yaml
     default:
       $ref: ../components/responses/UnexpectedError.yaml

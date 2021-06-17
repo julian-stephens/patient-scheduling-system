@@ -1,6 +1,6 @@
-- name: patientId
-  in: path
-  required: true
-  description: The id of the patient to retrieve
-  schema:
-    $ref: ../components/schemas/UID.yaml
+name: patientId
+in: path
+required: true
+description: The id of the patient to retrieve
+schema:
+  $ref: ../schemas/UID.yaml

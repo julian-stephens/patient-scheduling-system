@@ -1,6 +1,6 @@
-- name: pharmacyId
-  in: path
-  required: true
-  description: The id of the pharmacy to retrieve
-  schema:
-    $ref: ../components/schemas/UID.yaml
+name: pharmacyId
+in: path
+required: true
+description: The id of the pharmacy to retrieve
+schema:
+  $ref: ../schemas/UID.yaml

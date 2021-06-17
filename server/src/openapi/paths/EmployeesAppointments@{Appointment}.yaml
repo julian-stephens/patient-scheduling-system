@@ -1,13 +1,14 @@
-get: 
+get:
   summary: Get a specific appointment for a specific employee
   tags:
     - employees
   operationId: showAppointmentByEmployee
   parameters:
-    $ref: ../components/parameters/EmployeeId.yaml
-    $ref: ../components/parameters/AppointmentId.yaml
+    - $ref: ../components/parameters/EmployeeId.yaml
+    - $ref: ../components/parameters/AppointmentId.yaml
   responses:
-    $ref: ../components/responses/Ok.yaml
+    "200":
+      $ref: ../components/responses/Ok.yaml
       content:
         "application/json":
           schema:
@@ -21,12 +22,13 @@ put:
     - employees
   operationId: updateAppointmentByEmployee
   parameters:
-    $ref: ../components/parameters/EmployeeId.yaml
-    $ref: ../components/parameters/AppointmentId.yaml
+    - $ref: ../components/parameters/EmployeeId.yaml
+    - $ref: ../components/parameters/AppointmentId.yaml
   requestBody:
     $ref: ../components/requestBodies/AppointmentRequest.yaml
   responses:
-    $ref: ../components/responses/Updated.yaml
+    "204":
+      $ref: ../components/responses/Updated.yaml
     default:
       $ref: ../components/responses/UnexpectedError.yaml
 
@@ -36,10 +38,11 @@ delete:
     - employees
   operationId: deleteAppointmentByEmployee
   parameters:
-    $ref: ../components/parameters/EmployeeId.yaml
-    $ref: ../components/parameters/AppointmentId.yaml
+    - $ref: ../components/parameters/EmployeeId.yaml
+    - $ref: ../components/parameters/AppointmentId.yaml
   responses:
-    $ref: ../components/responses/Deleted.yaml
+    "204":
+      $ref: ../components/responses/Deleted.yaml
       content:
         "application/json":
           schema:

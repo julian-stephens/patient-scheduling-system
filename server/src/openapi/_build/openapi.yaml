@@ -191,19 +191,11 @@ paths:
       operationId: getAllPatients
       responses:
         '200':
-          description: A paged array of patients
-          headers:
-            x-next:
-              description: A link to the next page of responses
-              schema:
-                type: string
           content:
             application/json:
               schema:
-                description: List all patients
-                type: array
-                items:
-                  $ref: '#/paths/~1patients/post/requestBody/content/application~1json/schema'
+                $ref: ../components/schemas/Patients.yaml
+          description: Operation completed successfully.
         default:
           description: Unexpected Error
           content:
@@ -236,48 +228,15 @@ paths:
                   discriminator:
                     propertyName: personType
                   anyOf:
-                    - type: object
-                      properties:
-                        city:
-                          description: 'City, district, suburb, town, or village.'
-                          maxLength: 5000
-                          nullable: true
-                          type: string
-                        country:
-                          description: 'Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).'
-                          maxLength: 5000
-                          nullable: true
-                          type: string
-                        line1:
-                          description: 'Address line 1 (e.g., street, PO Box, or company name).'
-                          maxLength: 5000
-                          nullable: true
-                          type: string
-                        line2:
-                          description: 'Address line 2 (e.g., apartment, suite, unit, or building).'
-                          maxLength: 5000
-                          nullable: true
-                          type: string
-                        postal_code:
-                          description: ZIP or postal code.
-                          maxLength: 5000
-                          nullable: true
-                          type: string
-                        state:
-                          description: 'State, county, province, or region.'
-                          maxLength: 5000
-                          nullable: true
-                          type: string
+                    - $ref: '#/paths/~1pharmacies/post/requestBody/content/application~1json/schema/anyOf/0'
                     - type: object
                       properties:
                         id:
+                          $ref: '#/paths/~1patients~1%7BpatientId%7D/get/parameters/0/schema'
                           nullable: true
-                          type: string
-                          description: The unique identifier of the resource
-                          maxLength: 5000
                         name:
                           description: The person's full legal name.
-                          $ref: '#/paths/~1patients/get/responses/200/content/application~1json/schema/items/allOf/1/properties/medications/items/properties/name'
+                          $ref: '#/paths/~1medications/post/requestBody/content/application~1json/schema/properties/name'
                         email:
                           description: The person's email address.
                           type: string
@@ -314,98 +273,886 @@ paths:
                           type: array
                           description: The upcoming and previous appointments that a person has scheduled
                           items:
-                            type: object
-                            properties:
-                              id:
-                                $ref: '#/paths/~1patients/get/responses/200/content/application~1json/schema/items/allOf/0/anyOf/1/properties/id'
-                                nullable: true
-                              dateTime:
-                                type: string
-                                format: date-time
-                              reason:
-                                type: string
-                                enum:
-                                  - SICK
-                                  - PHYSICAL
-                                  - DRUG
-                                  - ALLERGY
-                              createdAt:
-                                $ref: '#/paths/~1patients/get/responses/200/content/application~1json/schema/items/allOf/0/anyOf/1/properties/createdAt'
+                            $ref: '#/paths/~1appointments/post/requestBody/content/application~1json/schema'
                         createdAt:
-                          type: string
-                          format: date-time
+                          $ref: '#/paths/~1medications/post/requestBody/content/application~1json/schema/properties/createdAt'
                         personType:
                           type: string
-                          enum:
-                            - DOCTOR
-                            - RECEPTIONIST
-                            - SUPERVISOR
+                          $ref: '#/paths/~1employees/post/requestBody/content/application~1json/schema/allOf/1/properties/role'
                 - type: object
                   properties:
                     medications:
                       description: The medications that a patient is currently prescribed
                       type: array
                       items:
-                        description: A medication to be prescribed to a patient
-                        type: object
-                        required:
-                          - name
-                          - dosage
-                        properties:
-                          id:
-                            $ref: '#/paths/~1patients/get/responses/200/content/application~1json/schema/items/allOf/0/anyOf/1/properties/id'
-                            nullable: true
-                          name:
-                            description: The full name of a resource
-                            type: string
-                            maxLength: 100
-                            example: John Doe
-                          issueDate:
-                            description: The date that the medication was prescribed
-                            type: string
-                            format: date
-                            example: 2021-06-08T00:00:00.000Z
-                          dosage:
-                            type: string
-                            description: The recommended dosage associated with the prescribed medication
-                          duration:
-                            type: integer
-                            description: The number of days that the medication should be prescribed
-                          patient:
-                            $ref: '#/paths/~1patients/post/requestBody/content/application~1json/schema'
-                          createdAt:
-                            $ref: '#/paths/~1patients/get/responses/200/content/application~1json/schema/items/allOf/0/anyOf/1/properties/createdAt'
+                        $ref: '#/paths/~1medications/post/requestBody/content/application~1json/schema'
                     pharmacy:
-                      description: A pharmacy that fills patient presciptions
-                      anyOf:
-                        - $ref: '#/paths/~1patients/get/responses/200/content/application~1json/schema/items/allOf/0/anyOf/0'
-                        - type: object
-                          properties:
-                            id:
-                              $ref: '#/paths/~1patients/get/responses/200/content/application~1json/schema/items/allOf/0/anyOf/1/properties/id'
-                              nullable: true
-                            name:
-                              $ref: '#/paths/~1patients/get/responses/200/content/application~1json/schema/items/allOf/1/properties/medications/items/properties/name'
-                            address: null
-                            createdAt:
-                              $ref: '#/paths/~1patients/get/responses/200/content/application~1json/schema/items/allOf/0/anyOf/1/properties/createdAt'
+                      $ref: '#/paths/~1pharmacies/post/requestBody/content/application~1json/schema'
                     primaryDoctor:
-                      description: A representation of an Employee
-                      allOf:
-                        - $ref: '#/paths/~1patients/post/requestBody/content/application~1json/schema/allOf/0'
-                        - type: object
-                          properties:
-                            role:
-                              type: string
-                              $ref: '#/paths/~1patients/get/responses/200/content/application~1json/schema/items/allOf/0/anyOf/1/properties/personType'
-                            supervisor:
-                              $ref: '#/paths/~1patients/post/requestBody/content/application~1json/schema/allOf/0'
-                            createdAt:
-                              $ref: '#/paths/~1patients/get/responses/200/content/application~1json/schema/items/allOf/0/anyOf/1/properties/createdAt'
+                      $ref: '#/paths/~1employees/post/requestBody/content/application~1json/schema'
                     admitStatus:
                       type: boolean
       responses:
         '201':
           description: Resource created successfully.
         default:
+          $ref: '#/paths/~1patients/get/responses/default'
+  '/patients/{patientId}':
+    get:
+      summary: Info for a specific patient
+      tags:
+        - patients
+      operationId: showPatientById
+      parameters:
+        - name: patientId
+          in: path
+          required: true
+          description: The id of the patient to retrieve
+          schema:
+            type: string
+            description: The unique identifier of the resource
+            maxLength: 5000
+      responses:
+        '200':
+          $ref: '#/paths/~1patients/get/responses/200'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Patient.yaml
+        '404':
+          description: Resource not found.
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+    put:
+      summary: Update info for a specific patient
+      tags:
+        - patients
+      operationId: updatePatient
+      parameters:
+        - $ref: '#/paths/~1patients~1%7BpatientId%7D/get/parameters/0'
+      requestBody:
+        $ref: '#/paths/~1patients/post/requestBody'
+      responses:
+        '204':
+          description: Resource updated successfully.
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+    delete:
+      summary: Delete a specific patient
+      tags:
+        - patients
+      operationId: deletePatient
+      parameters:
+        - $ref: '#/paths/~1patients~1%7BpatientId%7D/get/parameters/0'
+      responses:
+        '204':
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Patient.yaml
+          description: Resource deleted successfully.
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+  '/patients/{patientId}/appointments':
+    get:
+      summary: Get all appointments for a specific patient
+      tags:
+        - patients
+      operationId: getAppointmentsByPatient
+      parameters:
+        - $ref: '#/paths/~1patients~1%7BpatientId%7D/get/parameters/0'
+      responses:
+        '200':
+          $ref: '#/paths/~1patients/get/responses/200'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Appointments.yaml
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+    post:
+      summary: Create an appointment for a specific patient
+      tags:
+        - patients
+      operationId: createAppointmentByPatient
+      parameters:
+        - $ref: '#/paths/~1patients~1%7BpatientId%7D/get/parameters/0'
+      requestBody:
+        $ref: '#/paths/~1appointments/post/requestBody'
+      responses:
+        '201':
+          $ref: '#/paths/~1patients/post/responses/201'
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+  '/patients/{patientId}/appointments/{appointmentId}':
+    get:
+      summary: Get a specific appointment for a specific patient
+      tags:
+        - patients
+      operationId: showAppointmentByPatient
+      parameters:
+        - $ref: '#/paths/~1patients~1%7BpatientId%7D/get/parameters/0'
+        - $ref: '#/paths/~1appointments~1%7BappointmentId%7D/get/parameters/0'
+      responses:
+        '200':
+          $ref: '#/paths/~1patients/get/responses/200'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Appointment.yaml
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+    put:
+      summary: Update a specific appointment for a specific patient
+      tags:
+        - patients
+      operationId: updateAppointmentByPatient
+      parameters:
+        - $ref: '#/paths/~1patients~1%7BpatientId%7D/get/parameters/0'
+        - $ref: '#/paths/~1appointments~1%7BappointmentId%7D/get/parameters/0'
+      requestBody:
+        $ref: '#/paths/~1appointments/post/requestBody'
+      responses:
+        '204':
+          $ref: '#/paths/~1patients~1%7BpatientId%7D/put/responses/204'
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+    delete:
+      summary: Delete a specific appointment for a specific patient
+      tags:
+        - patients
+      operationId: deleteAppointmentByPatient
+      parameters:
+        - $ref: '#/paths/~1patients~1%7BpatientId%7D/get/parameters/0'
+        - $ref: '#/paths/~1appointments~1%7BappointmentId%7D/get/parameters/0'
+      responses:
+        '204':
+          $ref: '#/paths/~1patients~1%7BpatientId%7D/delete/responses/204'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Appointment.yaml
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+  '/patients/{patientId}/medications':
+    get:
+      summary: Get all medications for a specific patient
+      tags:
+        - patients
+      operationId: getMedicationsByPatient
+      parameters:
+        - $ref: '#/paths/~1patients~1%7BpatientId%7D/get/parameters/0'
+      responses:
+        '200':
+          $ref: '#/paths/~1patients/get/responses/200'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Medications.yaml
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+    post:
+      summary: Create an medication for a specific patient
+      tags:
+        - patients
+      operationId: createMedicationByPatient
+      parameters:
+        - $ref: '#/paths/~1patients~1%7BpatientId%7D/get/parameters/0'
+      requestBody:
+        $ref: '#/paths/~1medications/post/requestBody'
+      responses:
+        '201':
+          $ref: '#/paths/~1patients/post/responses/201'
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+  '/patients/{patientId}/medications/{medicationId}':
+    get:
+      summary: Get a specific medication for a specific patient
+      tags:
+        - patients
+      operationId: showMedicationByPatient
+      parameters:
+        - $ref: '#/paths/~1patients~1%7BpatientId%7D/get/parameters/0'
+        - $ref: '#/paths/~1medications~1%7BmedicationId%7D/get/parameters/0'
+      responses:
+        '200':
+          $ref: '#/paths/~1patients/get/responses/200'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Medication.yaml
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+    put:
+      summary: Update a specific medication for a specific patient
+      tags:
+        - patients
+      operationId: updateMedicationByPatient
+      parameters:
+        - $ref: '#/paths/~1patients~1%7BpatientId%7D/get/parameters/0'
+        - $ref: '#/paths/~1medications~1%7BmedicationId%7D/get/parameters/0'
+      requestBody:
+        $ref: '#/paths/~1medications/post/requestBody'
+      responses:
+        '204':
+          $ref: '#/paths/~1patients~1%7BpatientId%7D/put/responses/204'
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+    delete:
+      summary: Delete a specific medication for a specific patient
+      tags:
+        - patients
+      operationId: deleteMedicationByPatient
+      parameters:
+        - $ref: '#/paths/~1patients~1%7BpatientId%7D/get/parameters/0'
+        - $ref: '#/paths/~1medications~1%7BmedicationId%7D/get/parameters/0'
+      responses:
+        '204':
+          $ref: '#/paths/~1patients~1%7BpatientId%7D/delete/responses/204'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Medication.yaml
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+  '/patients/{patientId}/pharmacies':
+    get:
+      summary: Get all pharmacies for a specific patient
+      tags:
+        - patients
+      operationId: getPharmaciesByPatient
+      parameters:
+        - $ref: '#/paths/~1patients~1%7BpatientId%7D/get/parameters/0'
+      responses:
+        '200':
+          $ref: '#/paths/~1patients/get/responses/200'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Pharmacies.yaml
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+    post:
+      summary: Create a pharmacy for a specific patient
+      tags:
+        - patients
+      operationId: createPharmacyByPatient
+      parameters:
+        - $ref: '#/paths/~1patients~1%7BpatientId%7D/get/parameters/0'
+      requestBody:
+        $ref: '#/paths/~1pharmacies/post/requestBody'
+      responses:
+        '201':
+          $ref: '#/paths/~1patients/post/responses/201'
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+  '/patients/{patientId}/pharmacies/{pharmacyId}':
+    get:
+      summary: Get a specific pharmacy for a specific patient
+      tags:
+        - patients
+      operationId: showPharmaciesByPatient
+      parameters:
+        - $ref: '#/paths/~1patients~1%7BpatientId%7D/get/parameters/0'
+        - $ref: '#/paths/~1pharmacies~1%7BpharmacyId%7D/get/parameters/0'
+      responses:
+        '200':
+          $ref: '#/paths/~1patients/get/responses/200'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Pharmacy.yaml
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+    put:
+      summary: Update a specific pharmacy for a specific patient
+      tags:
+        - patients
+      operationId: updatePharmacyByPatient
+      parameters:
+        - $ref: '#/paths/~1patients~1%7BpatientId%7D/get/parameters/0'
+        - $ref: '#/paths/~1pharmacies~1%7BpharmacyId%7D/get/parameters/0'
+      requestBody:
+        $ref: '#/paths/~1pharmacies/post/requestBody'
+      responses:
+        '204':
+          $ref: '#/paths/~1patients~1%7BpatientId%7D/put/responses/204'
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+    delete:
+      summary: Delete a specific pharmacy for a specific patient
+      tags:
+        - patients
+      operationId: deletePharmacyByPatient
+      parameters:
+        - $ref: '#/paths/~1patients~1%7BpatientId%7D/get/parameters/0'
+        - $ref: '#/paths/~1pharmacies~1%7BpharmacyId%7D/get/parameters/0'
+      responses:
+        '204':
+          $ref: '#/paths/~1patients~1%7BpatientId%7D/delete/responses/204'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Pharamacy.yaml
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+  /employees:
+    get:
+      summary: List all employees
+      tags:
+        - employees
+      operationId: getAllEmployees
+      parameters:
+        - name: limit
+          in: query
+          description: max records to return
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 10
+            maximum: 20
+            example: 15
+        - name: sort
+          in: query
+          schema:
+            sortType:
+              type: string
+              description: The direction of the sort
+              enum:
+                - asc
+                - desc
+      responses:
+        '200':
+          $ref: '#/paths/~1patients/get/responses/200'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Employees.yaml
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+    post:
+      summary: Create an employee
+      tags:
+        - employees
+      operationId: createEmployee
+      requestBody:
+        description: Employee to add to the system
+        content:
+          application/json:
+            schema:
+              description: A representation of an Employee
+              allOf:
+                - $ref: '#/paths/~1patients/post/requestBody/content/application~1json/schema/allOf/0'
+                - type: object
+                  properties:
+                    role:
+                      type: string
+                      enum:
+                        - DOCTOR
+                        - RECEPTIONIST
+                        - SUPERVISOR
+                    supervisor:
+                      $ref: '#/paths/~1patients/post/requestBody/content/application~1json/schema/allOf/0'
+                    createdAt:
+                      $ref: '#/paths/~1medications/post/requestBody/content/application~1json/schema/properties/createdAt'
+      responses:
+        '201':
+          $ref: '#/paths/~1patients/post/responses/201'
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+  '/employees/{employeeId}':
+    get:
+      summary: Info for a specific employee
+      tags:
+        - employees
+      operationId: showEmployeeById
+      parameters:
+        - name: employeeId
+          in: path
+          required: true
+          description: The id of the employee to retrieve
+          schema:
+            $ref: '#/paths/~1patients~1%7BpatientId%7D/get/parameters/0/schema'
+      responses:
+        '200':
+          $ref: ../components/responses/Ok.yaml
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Employee.yaml
+        $ref: '#/paths/~1patients~1%7BpatientId%7D/get/responses/404'
+        default:
           $ref: ../components/responses/UnexpectedError.yaml
+    put:
+      summary: Update info for a specific employee
+      tags:
+        - employees
+      operationId: updateEmployee
+      parameters:
+        - $ref: '#/paths/~1employees~1%7BemployeeId%7D/get/parameters/0'
+      requestBody:
+        $ref: '#/paths/~1employees/post/requestBody'
+      responses:
+        '204':
+          $ref: '#/paths/~1patients~1%7BpatientId%7D/put/responses/204'
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+    delete:
+      summary: Delete a specific employee
+      tags:
+        - employees
+      operationId: deleteEmployee
+      parameters:
+        - $ref: '#/paths/~1employees~1%7BemployeeId%7D/get/parameters/0'
+      responses:
+        '204':
+          $ref: '#/paths/~1patients~1%7BpatientId%7D/delete/responses/204'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Employee.yaml
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+  '/employees/{employeeId}/appointments':
+    get:
+      summary: Get all appointments for a specific employee
+      tags:
+        - employees
+      operationId: getAppointmentsByEmployee
+      parameters:
+        - $ref: '#/paths/~1employees~1%7BemployeeId%7D/get/parameters/0'
+      responses:
+        20O:
+          $ref: '#/paths/~1patients/get/responses/200'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Appointments.yaml
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+    post:
+      summary: Create an appointment for a specific employee
+      tags:
+        - employees
+      operationId: createAppointmentByEmployee
+      parameters:
+        - $ref: '#/paths/~1employees~1%7BemployeeId%7D/get/parameters/0'
+      requestBody:
+        $ref: '#/paths/~1appointments/post/requestBody'
+      responses:
+        '201':
+          $ref: '#/paths/~1patients/post/responses/201'
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+  '/employees/{employeeId}/appointments/{appointmentId}':
+    get:
+      summary: Get a specific appointment for a specific employee
+      tags:
+        - employees
+      operationId: showAppointmentByEmployee
+      parameters:
+        - $ref: '#/paths/~1employees~1%7BemployeeId%7D/get/parameters/0'
+        - $ref: '#/paths/~1appointments~1%7BappointmentId%7D/get/parameters/0'
+      responses:
+        '200':
+          $ref: '#/paths/~1patients/get/responses/200'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Appointment.yaml
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+    put:
+      summary: Update a specific appointment for a specific employee
+      tags:
+        - employees
+      operationId: updateAppointmentByEmployee
+      parameters:
+        - $ref: '#/paths/~1employees~1%7BemployeeId%7D/get/parameters/0'
+        - $ref: '#/paths/~1appointments~1%7BappointmentId%7D/get/parameters/0'
+      requestBody:
+        $ref: '#/paths/~1appointments/post/requestBody'
+      responses:
+        '204':
+          $ref: '#/paths/~1patients~1%7BpatientId%7D/put/responses/204'
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+    delete:
+      summary: Delete a specific appointment for a specific employee
+      tags:
+        - employees
+      operationId: deleteAppointmentByEmployee
+      parameters:
+        - $ref: '#/paths/~1employees~1%7BemployeeId%7D/get/parameters/0'
+        - $ref: '#/paths/~1appointments~1%7BappointmentId%7D/get/parameters/0'
+      responses:
+        '204':
+          $ref: '#/paths/~1patients~1%7BpatientId%7D/delete/responses/204'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Appointment.yaml
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+  /appointments:
+    get:
+      summary: List all appointments
+      tags:
+        - appointments
+      operationId: getAllAppointments
+      parameters:
+        - $ref: '#/paths/~1employees/get/parameters/0'
+        - $ref: '#/paths/~1employees/get/parameters/1'
+      responses:
+        '200':
+          $ref: '#/paths/~1patients/get/responses/200'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Appointments.yaml
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+    post:
+      summary: Create a appointment
+      tags:
+        - appointments
+      operationId: createAppointment
+      requestBody:
+        description: Appointment to add to the system
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  $ref: '#/paths/~1patients~1%7BpatientId%7D/get/parameters/0/schema'
+                  nullable: true
+                dateTime:
+                  type: string
+                  format: date-time
+                reason:
+                  type: string
+                  enum:
+                    - SICK
+                    - PHYSICAL
+                    - DRUG
+                    - ALLERGY
+                createdAt:
+                  $ref: '#/paths/~1medications/post/requestBody/content/application~1json/schema/properties/createdAt'
+      responses:
+        '201':
+          $ref: '#/paths/~1patients/post/responses/201'
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+  '/appointments/{appointmentId}':
+    get:
+      summary: Info for a specific appointment
+      tags:
+        - appointments
+      operationId: showAppointmentById
+      parameters:
+        - name: appointmentId
+          in: path
+          required: true
+          description: The id of the appointment to retrieve
+          schema:
+            $ref: '#/paths/~1patients~1%7BpatientId%7D/get/parameters/0/schema'
+      responses:
+        '200':
+          $ref: ../components/responses/Ok.yaml
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Appointment.yaml
+        $ref: '#/paths/~1patients~1%7BpatientId%7D/get/responses/404'
+        default:
+          $ref: ../components/responses/UnexpectedError.yaml
+    put:
+      summary: Update info for a specific appointment
+      tags:
+        - appointments
+      operationId: updateAppointment
+      parameters:
+        - $ref: '#/paths/~1appointments~1%7BappointmentId%7D/get/parameters/0'
+      requestBody:
+        $ref: '#/paths/~1appointments/post/requestBody'
+      responses:
+        '204':
+          $ref: '#/paths/~1patients~1%7BpatientId%7D/put/responses/204'
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+    delete:
+      summary: Delete a specific appointment
+      tags:
+        - appointments
+      operationId: deleteAppointment
+      parameters:
+        - $ref: '#/paths/~1appointments~1%7BappointmentId%7D/get/parameters/0'
+      responses:
+        '204':
+          $ref: '#/paths/~1patients~1%7BpatientId%7D/delete/responses/204'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Appointment.yaml
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+  /medications:
+    get:
+      summary: List all medications
+      tags:
+        - medications
+      operationId: getAllMedications
+      parameters:
+        - $ref: '#/paths/~1employees/get/parameters/0'
+        - $ref: '#/paths/~1employees/get/parameters/1'
+      responses:
+        '200':
+          $ref: '#/paths/~1patients/get/responses/200'
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Medications.yaml
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+    post:
+      summary: Create a medication
+      tags:
+        - medications
+      operationId: createMedication
+      requestBody:
+        description: Medication to add to the system
+        content:
+          application/json:
+            schema:
+              description: A medication to be prescribed to a patient
+              type: object
+              required:
+                - name
+                - dosage
+              properties:
+                id:
+                  $ref: '#/paths/~1patients~1%7BpatientId%7D/get/parameters/0/schema'
+                  nullable: true
+                name:
+                  description: The full name of a resource
+                  type: string
+                  maxLength: 100
+                  example: John Doe
+                issueDate:
+                  description: The date that the medication was prescribed
+                  type: string
+                  format: date
+                  example: 2021-06-08T00:00:00.000Z
+                dosage:
+                  type: string
+                  description: The recommended dosage associated with the prescribed medication
+                duration:
+                  type: integer
+                  description: The number of days that the medication should be prescribed
+                patient:
+                  $ref: '#/paths/~1patients/post/requestBody/content/application~1json/schema'
+                createdAt:
+                  type: string
+                  format: date-time
+      responses:
+        '201':
+          $ref: '#/paths/~1patients/post/responses/201'
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+  '/medications/{medicationId}':
+    get:
+      summary: Info for a specific medication
+      tags:
+        - medications
+      operationId: showMedicationById
+      parameters:
+        - name: medicationId
+          in: path
+          required: true
+          description: The id of the medication to retrieve
+          schema:
+            $ref: '#/paths/~1patients~1%7BpatientId%7D/get/parameters/0/schema'
+      responses:
+        '200':
+          $ref: '#/paths/~1patients/get/responses/200'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Medication.yaml
+        '404':
+          $ref: '#/paths/~1patients~1%7BpatientId%7D/get/responses/404'
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+    put:
+      summary: Update info for a specific medication
+      tags:
+        - medications
+      operationId: updateMedication
+      parameters:
+        - $ref: '#/paths/~1medications~1%7BmedicationId%7D/get/parameters/0'
+      requestBody:
+        $ref: '#/paths/~1medications/post/requestBody'
+      responses:
+        '204':
+          $ref: '#/paths/~1patients~1%7BpatientId%7D/put/responses/204'
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+    delete:
+      summary: Delete a specific medication
+      tags:
+        - medications
+      operationId: deleteMedication
+      parameters:
+        - $ref: '#/paths/~1medications~1%7BmedicationId%7D/get/parameters/0'
+      responses:
+        '204':
+          $ref: '#/paths/~1patients~1%7BpatientId%7D/delete/responses/204'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Medication.yaml
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+  /pharmacies:
+    get:
+      summary: List all pharmacies
+      tags:
+        - pharmacies
+      operationId: getAllPharmacies
+      parameters:
+        - $ref: '#/paths/~1employees/get/parameters/0'
+        - $ref: '#/paths/~1employees/get/parameters/1'
+      responses:
+        '200':
+          $ref: '#/paths/~1patients/get/responses/200'
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Pharmacies.yaml
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+    post:
+      summary: Create a pharmacy
+      tags:
+        - pharmacies
+      operationId: createPharmacy
+      requestBody:
+        description: Pharmacy to add to the system
+        content:
+          application/json:
+            schema:
+              description: A pharmacy that fills patient presciptions
+              anyOf:
+                - type: object
+                  properties:
+                    city:
+                      description: 'City, district, suburb, town, or village.'
+                      maxLength: 5000
+                      nullable: true
+                      type: string
+                    country:
+                      description: 'Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).'
+                      maxLength: 5000
+                      nullable: true
+                      type: string
+                    line1:
+                      description: 'Address line 1 (e.g., street, PO Box, or company name).'
+                      maxLength: 5000
+                      nullable: true
+                      type: string
+                    line2:
+                      description: 'Address line 2 (e.g., apartment, suite, unit, or building).'
+                      maxLength: 5000
+                      nullable: true
+                      type: string
+                    postal_code:
+                      description: ZIP or postal code.
+                      maxLength: 5000
+                      nullable: true
+                      type: string
+                    state:
+                      description: 'State, county, province, or region.'
+                      maxLength: 5000
+                      nullable: true
+                      type: string
+                - type: object
+                  properties:
+                    id:
+                      $ref: '#/paths/~1patients~1%7BpatientId%7D/get/parameters/0/schema'
+                      nullable: true
+                    name:
+                      $ref: '#/paths/~1medications/post/requestBody/content/application~1json/schema/properties/name'
+                    address: null
+                    createdAt:
+                      $ref: '#/paths/~1medications/post/requestBody/content/application~1json/schema/properties/createdAt'
+      responses:
+        '201':
+          $ref: '#/paths/~1patients/post/responses/201'
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+  '/pharmacies/{pharmacyId}':
+    get:
+      summary: Info for a specific pharmacy
+      tags:
+        - pharmacies
+      operationId: showPharmacyById
+      parameters:
+        - name: pharmacyId
+          in: path
+          required: true
+          description: The id of the pharmacy to retrieve
+          schema:
+            $ref: '#/paths/~1patients~1%7BpatientId%7D/get/parameters/0/schema'
+      responses:
+        '200':
+          $ref: '#/paths/~1patients/get/responses/200'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Pharmacy.yaml
+        '404':
+          $ref: '#/paths/~1patients~1%7BpatientId%7D/get/responses/404'
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+    put:
+      summary: Update info for a specific pharmacy
+      tags:
+        - pharmacies
+      operationId: updatePharmacy
+      parameters:
+        - $ref: '#/paths/~1pharmacies~1%7BpharmacyId%7D/get/parameters/0'
+      requestBody:
+        $ref: '#/paths/~1pharmacies/post/requestBody'
+      responses:
+        '204':
+          $ref: '#/paths/~1patients~1%7BpatientId%7D/put/responses/204'
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'
+    delete:
+      summary: Delete a specific pharmacy
+      tags:
+        - pharmacies
+      operationId: deletePharmacy
+      parameters:
+        - $ref: '#/paths/~1pharmacies~1%7BpharmacyId%7D/get/parameters/0'
+      responses:
+        '204':
+          $ref: '#/paths/~1patients~1%7BpatientId%7D/delete/responses/204'
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Pharmacy.yaml
+        default:
+          $ref: '#/paths/~1patients/get/responses/default'

@@ -4,10 +4,11 @@ get:
     - patients
   operationId: getPharmaciesByPatient
   parameters:
-    $ref: ../components/parameters/PatientId.yaml
+    - $ref: ../components/parameters/PatientId.yaml
   responses:
-    $ref: ../components/responses/Ok.yaml
-      content: 
+    "200":
+      $ref: ../components/responses/Ok.yaml
+      content:
         "application/json":
           schema:
             $ref: ../components/schemas/Pharmacies.yaml
@@ -20,10 +21,11 @@ post:
     - patients
   operationId: createPharmacyByPatient
   parameters:
-    $ref: ../components/parameters/PatientId.yaml
+    - $ref: ../components/parameters/PatientId.yaml
   requestBody:
     $ref: ../components/requestBodies/PharmacyRequest.yaml
   responses:
-    $ref: ../components/responses/Created.yaml
+    "201":
+      $ref: ../components/responses/Created.yaml
     default:
       $ref: ../components/responses/UnexpectedError.yaml

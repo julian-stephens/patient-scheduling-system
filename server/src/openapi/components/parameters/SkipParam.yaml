@@ -1,8 +1,7 @@
-skipParam:
-  name: skip
-  in: query
-  description: number of items to skip
-  required: true
-  schema:
-    type: integer
-    format: int32
+name: skip
+in: query
+description: number of items to skip
+required: true
+schema:
+  type: integer
+  format: int32

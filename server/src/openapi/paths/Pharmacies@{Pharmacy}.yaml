@@ -3,16 +3,17 @@ get:
   tags:
     - pharmacies
   operationId: showPharmacyById
-  parameters: 
-    $ref: ../components/parameters/PharmacyId.yaml
+  parameters:
+    - $ref: ../components/parameters/PharmacyId.yaml
   responses:
     "200":
-      description: OK
+      $ref: ../components/responses/Ok.yaml
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Pharmacy.yaml
-    $ref: ../components/responses/NotFound.yaml
+    "404":
+      $ref: ../components/responses/NotFound.yaml
     default:
       $ref: ../components/responses/UnexpectedError.yaml
 
@@ -20,13 +21,14 @@ put:
   summary: Update info for a specific pharmacy
   tags:
     - pharmacies
-  operationId: updatePharmacy 
-  parameters: 
-    $ref: ../components/parameters/PharmacyId.yaml
+  operationId: updatePharmacy
+  parameters:
+    - $ref: ../components/parameters/PharmacyId.yaml
   requestBody:
     $ref: ../components/requestBodies/PharmacyRequest.yaml
   responses:
-    $ref: ../components/responses/Updated.yaml
+    "204":
+      $ref: ../components/responses/Updated.yaml
     default:
       $ref: ../components/responses/UnexpectedError.yaml
 
@@ -36,9 +38,10 @@ delete:
     - pharmacies
   operationId: deletePharmacy
   parameters:
-    $ref: ../components/parameters/PharmacyId.yaml
+    - $ref: ../components/parameters/PharmacyId.yaml
   responses:
-    $ref: ../components/responses/Deleted.yaml
+    "204":
+      $ref: ../components/responses/Deleted.yaml
       content:
         "application/json":
           schema:

@@ -4,16 +4,16 @@ get:
     - employees
   operationId: getAllEmployees
   parameters:
-    $ref: ../components/parameters/LimitParam.yaml
-    $ref: ../components/parameters/SortParam.yaml
+    - $ref: ../components/parameters/LimitParam.yaml
+    - $ref: ../components/parameters/SortParam.yaml
   responses:
     "200":
-      description: A paged array of employees
-      headers:
-        x-next:
-          description: A link to the next page of responses
-          schema:
-            type: string
+      $ref: ../components/responses/Ok.yaml
+      # headers:
+      #   x-next:
+      #     description: A link to the next page of responses
+      #     schema:
+      #       type: string
       content:
         application/json:
           schema:
@@ -29,6 +29,7 @@ post:
   requestBody:
     $ref: ../components/requestBodies/EmployeeRequest.yaml
   responses:
-    $ref: ../components/responses/Created.yaml
+    "201":
+      $ref: ../components/responses/Created.yaml
     default:
       $ref: ../components/responses/UnexpectedError.yaml
