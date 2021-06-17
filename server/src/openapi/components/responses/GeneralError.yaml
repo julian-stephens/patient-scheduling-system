@@ -1,4 +1,4 @@
-GeneralError:
+"General Error":
   description: General Error
   content:
     application/json:
