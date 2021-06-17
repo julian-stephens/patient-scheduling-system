@@ -26,5 +26,5 @@
     requestBody:
       $ref: ../components/requestBodies/PatientRequest.yaml
     responses:
-      $ref: ../components/responses/Created.yaml
       $ref: ../components/responses/GeneralError.yaml
+      $ref: ../components/responses/Created.yaml
