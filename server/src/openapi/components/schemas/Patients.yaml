@@ -1,4 +1,4 @@
 description: List all patients
 type: array
-  items: 
-    $ref: ./Patient.yaml
+items:
+  $ref: ./Patient.yaml

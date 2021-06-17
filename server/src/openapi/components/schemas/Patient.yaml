@@ -2,15 +2,15 @@ description: A representation of a Patient
 allOf:
   - $ref: ./Person.yaml
   - type: object
-      properties:
-        medications:
-          description: The medications that a patient is currently prescribed
-          type: array
-          items:
-            $ref: ./Medication
-        pharmacy:
-          $ref: ./Pharmacy.yaml
-        primaryDoctor:
-          $ref: ./Employee.yaml
-        admitStatus:
-          type: boolean
+    properties:
+      medications:
+        description: The medications that a patient is currently prescribed
+        type: array
+        items:
+          $ref: ./Medication
+      pharmacy:
+        $ref: ./Pharmacy.yaml
+      primaryDoctor:
+        $ref: ./Employee.yaml
+      admitStatus:
+        type: boolean
