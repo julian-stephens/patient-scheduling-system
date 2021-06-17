@@ -16,7 +16,8 @@
           application/json:
             schema:
               $ref: ../components/schemas/Patients.yaml
-      $ref: ../components/responses/GeneralError.yaml
+      default:
+        $ref: ../components/responses/UnexpectedError.yaml
 
   post:
     summary: Create a patient
@@ -28,4 +29,4 @@
     responses:
       $ref: ../components/responses/Created.yaml
       default:
-        $ref: ../components/responses/GeneralError.yaml
+        $ref: ../components/responses/UnexpectedError.yaml
