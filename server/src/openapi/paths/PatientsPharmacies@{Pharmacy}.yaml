@@ -16,22 +16,6 @@ get:
     default:
       $ref: ../components/responses/UnexpectedError.yaml
 
-put:
-  summary: Update a specific pharmacy for a specific patient
-  tags:
-    - patients
-  operationId: updatePharmacyByPatient
-  parameters:
-    - $ref: ../components/parameters/PatientId.yaml
-    - $ref: ../components/parameters/PharmacyId.yaml
-  requestBody:
-    $ref: ../components/requestBodies/PharmacyRequest.yaml
-  responses:
-    204:
-      $ref: ../components/responses/Updated.yaml
-    default:
-      $ref: ../components/responses/UnexpectedError.yaml
-
 delete:
   summary: Delete a specific pharmacy for a specific patient
   tags:

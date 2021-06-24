@@ -1,26 +1,30 @@
 import { getRepository } from "typeorm";
-import { NextFunction, Request, Response } from "express";
-import { Patients } from "../entity/Patients";
+import { Request, Response } from "express";
+import { validate } from "class-validator";
+import { Patient } from "../entity/Patient";
 
-export class PatientsController {
-  private patientsRepository = getRepository(Patients);
+class PatientController {
+  static getPatients = async (req: Request, res: Response) => {
+    const patientsRepo = getRepository(Patient);
+    const patients = await patientsRepo.find({
+      select: ["id", "name", "email", "phone", "sex"],
+    });
 
-  async all(request: Request, response: Response, next: NextFunction) {
-    return this.patientsRepository.find();
-  }
+    res.send(patients);
+  };
 
-  async one(request: Request, response: Response, next: NextFunction) {
-    return this.patientsRepository.findOne(request.params.id);
-  }
+  static createPatient = async (req: Request, res: Response) => {
+    let { name, email, phone, sex } = req.body;
+    let patient = new Patient();
+    patient.name = name;
+    patient.email = email;
+    patient.phone = phone;
+    patient.sex = sex;
 
-  async save(request: Request, response: Response, next: NextFunction) {
-    return this.patientsRepository.save(request.body);
-  }
-
-  async remove(request: Request, response: Response, next: NextFunction) {
-    let patientToRemove = await this.patientsRepository.findOne(
-      request.params.id
-    );
-    await this.patientsRepository.remove(patientToRemove);
-  }
+    const errors = await validate(patient);
+    if (errors.length > 0) {
+      res.status(400).send(errors);
+      return;
+    }
+  };
 }

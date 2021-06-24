@@ -16,12 +16,10 @@ get:
       $ref: ../components/responses/UnexpectedError.yaml
 
 post:
-  summary: Create an medication for a specific patient
+  summary: Create a medication for a specific patient
   tags:
     - patients
   operationId: createMedicationByPatient
-  parameters:
-    - $ref: ../components/parameters/PatientId.yaml
   requestBody:
     $ref: ../components/requestBodies/MedicationRequest.yaml
   responses:

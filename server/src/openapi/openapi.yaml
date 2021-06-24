@@ -23,30 +23,32 @@ tags:
   - name: pharmacies
     description: Operations about pharmacies.
 paths:
-  /patients:
+  /users/patients:
     $ref: paths/Patients.yaml
-  /patients/{patientId}:
+  /users/patients/{patientId}:
     $ref: paths/Patients@{Patient}.yaml
-  /patients/{patientId}/appointments:
+  /users/patients/{patientId}/appointments:
     $ref: paths/PatientsAppointments.yaml
-  /patients/{patientId}/appointments/{appointmentId}:
+  /users/patients/{patientId}/appointments/{appointmentId}:
     $ref: paths/PatientsAppointments@{Appointment}.yaml
-  /patients/{patientId}/medications:
+  /users/patients/{patientId}/medications:
     $ref: paths/PatientsMedications.yaml
-  /patients/{patientId}/medications/{medicationId}:
+  /users/patients/{patientId}/medications/{medicationId}:
     $ref: paths/PatientsMedications@{Medication}.yaml
-  /patients/{patientId}/pharmacies:
+  /users/patients/{patientId}/pharmacies:
     $ref: paths/PatientsPharmacies.yaml
-  /patients/{patientId}/pharmacies/{pharmacyId}:
+  /users/patients/{patientId}/pharmacies/{pharmacyId}:
     $ref: paths/PatientsPharmacies@{Pharmacy}.yaml
-  /employees:
+  /users/employees:
     $ref: paths/Employees.yaml
-  /employees/{employeeId}:
+  /users/employees/{employeeId}:
     $ref: paths/Employees@{Employee}.yaml
-  /employees/{employeeId}/appointments:
+  /users/employees/{employeeId}/appointments:
     $ref: paths/EmployeesAppointments.yaml
-  /employees/{employeeId}/appointments/{appointmentId}:
+  /users/employees/{employeeId}/appointments/{appointmentId}:
     $ref: paths/EmployeesAppointments@{Appointment}.yaml
+  /users/employees/{employeeId}/patients:
+    $ref: paths/EmployeesPatients.yaml
   /appointments:
     $ref: paths/Appointments.yaml
   /appointments/{appointmentId}:

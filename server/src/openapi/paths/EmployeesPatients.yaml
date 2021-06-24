@@ -1,0 +1,16 @@
+get:
+  summary: Get all patients for a specific employee
+  tags:
+    - employees
+  operationId: getPatientsByEmployee
+  parameters:
+    - $ref: ../components/parameters/EmployeeId.yaml
+  responses:
+    200:
+      $ref: ../components/responses/Ok.yaml
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Patients.yaml
+    default:
+      $ref: ../components/responses/UnexpectedError.yaml

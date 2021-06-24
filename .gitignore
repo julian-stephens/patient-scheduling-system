@@ -1,1 +1,2 @@
 server/ormconfig.json
+server/src/config/*

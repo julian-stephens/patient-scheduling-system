@@ -4,33 +4,29 @@ import {
   Column,
   CreateDateColumn,
   OneToOne,
+  ManyToMany
   JoinColumn,
+  JoinTable
 } from "typeorm";
-
-import { States } from "./States";
+import {Medication} from "./Medication";
+import {Address} from "./Address";
 
 @Entity()
-export class Patients {
+export class Patient {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 100 })
+  @Column()
   name: string;
 
-  @Column({ length: 100 })
+  @Column()
   email: string;
 
-  @Column({ length: 100 })
+  @Column()
   phone: string;
 
   @Column({ length: 1 })
   sex: string;
-
-  @Column({ length: 100 })
-  city: string;
-
-  @Column({ length: 100 })
-  zip_code: string;
 
   @CreateDateColumn({
     type: "timestamp",
@@ -38,7 +34,15 @@ export class Patients {
   })
   created_at: Date;
 
-  @OneToOne(() => States)
+  @OneToOne(() => Address)
   @JoinColumn()
-  state: States;
+  address: Address;
+
+  @OneToOne(() => Pharmacy)
+  @JoinColumn()
+  pharmacy: Pharmacy;
+
+  @ManyToMany(() => Medication)
+  @JoinTable()
+  medications: Medication[];
 }
